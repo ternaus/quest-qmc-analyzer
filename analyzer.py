@@ -57,7 +57,9 @@ parser.add_argument('-legend', type=str, help='legend position. Possible values:
 args = parser.parse_args(sys.argv[1:])
 modelName = args.m
 
-path = os.path.join('..', '..', 'results', modelName)
+execfile('settings.py')
+
+path = os.path.join(folder_with_different_models, modelName)
 
 dataList = common.get_file_list.get_filelist(modelName, path)
 
