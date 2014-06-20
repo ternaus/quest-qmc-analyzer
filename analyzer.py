@@ -109,7 +109,7 @@ elif args.x_variable == 'beta':
   title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
   dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
                                             and common.fequals.equals(item.get_u(), args.u)
-                                            and (abs(item.get_rho()[0] - args.rho)) < 0.01)]
+                                            and (abs(item.get_rho()[0] - args.rho)) < 0.02 + item.get_rho()[1])]
 
 elif args.x_variable == 'T':
   xlabel(r'$T[t]$')
@@ -129,6 +129,8 @@ elif args.x_variable == '1L':
 #divide into classes, corresponding to different number of sites
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='nSites')
 
+for element in dataList:
+  print element.get_rho()
 #We choose what lattice sizes are we interested in
 nSites_list = common.choices.list_choice(into_nSites_dict.keys())
 
@@ -146,9 +148,7 @@ for nSites in nSites_list:
     print 'yList = ', yList
     print 'yErr = ', yErr
 
-if args.y_variable == 'Energy' and args.t != 0:
-  ylabel(r'$Energy[t]$')
-elif args.y_variable == 'Energy' and args.t == 0:
+if args.y_variable == 'Energy' and args.t == 0:
   ylabel(r'$Energy$')
 
 if args.y_variable == 'Energy_hop' and args.t != 0:
