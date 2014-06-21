@@ -66,6 +66,9 @@ dataList = common.get_file_list.get_filelist(modelName, path)
 #Clean up datafiles that are for sure bad. No moves were performed.
 dataList = [item for item in dataList if ((item.get_global_sites() > 0 and item.get_global_accept > 0) or item.get_global_sites() == 0)]
 
+# Clean up datafiles that are for sure bad. Electron density rho is bounded by 0 and 2.
+dataList = [item for item in dataList if (item.get_rho()[0] < 2.1)]
+
 #Not using files, that they have mu = 0 and 0 global moves, when u is not zero.
 # dataList = [item for item in dataList if
 #             ((
