@@ -90,6 +90,7 @@ cList = []
 cErr = []
 
 for rho in sorted(rhoDict.keys()):
+  print rho
   rho_data = [item for item in dataList if ((abs(item.get_rho()[0] - rho)) < 0.02 + item.get_rho()[1]
                                             and item.get_beta() >= rhoDict[rho])]
   #divide into classes, corresponding to different number of sites
@@ -109,6 +110,9 @@ for rho in sorted(rhoDict.keys()):
     yErr[i] = yErr[i] / yErr[i]
     xList[i] = 1 / math.sqrt(xList[i])
 
+  print xList
+  print yList
+  print yErr
   approxx, approxy, m, c, std_err = common.extrapolation.approx(xList, yList, yErr)
 
   c = max(c, 0)
