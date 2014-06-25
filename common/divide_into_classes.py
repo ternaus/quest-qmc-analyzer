@@ -1,5 +1,6 @@
 from __future__ import division
 __author__ = 'vladimir'
+import math
 
 def divide_into_classes(datList, **kwargs):
   '''
@@ -25,7 +26,7 @@ def divide_into_classes(datList, **kwargs):
 
   elif kwargs['parameter'] == '1L':
     for victim in datList:
-      key = 1.0 / victim.get_nx()
+      key = 1.0 / math.sqrt(victim.get_nSites())
       if key not in result:
         result[key] = [victim]
       else:

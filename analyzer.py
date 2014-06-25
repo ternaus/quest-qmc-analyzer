@@ -132,8 +132,6 @@ elif args.x_variable == '1L':
 #divide into classes, corresponding to different number of sites
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='nSites')
 
-for element in dataList:
-  print element.get_rho()
 #We choose what lattice sizes are we interested in
 nSites_list = common.choices.list_choice(into_nSites_dict.keys())
 
@@ -151,12 +149,10 @@ for nSites in nSites_list:
     print 'yList = ', yList
     print 'yErr = ', yErr
 
-if args.y_variable == 'Energy' and args.t == 0:
+if args.y_variable == 'Energy':
   ylabel(r'$Energy$')
 
-if args.y_variable == 'Energy_hop' and args.t != 0:
-  ylabel(r'$Energy_{hop}[t]$')
-elif args.y_variable == 'Energy_hop' and args.t == 0:
+if args.y_variable == 'Energy_hop':
   ylabel(r'$Energy_{hop}$')
 
 if args.y_variable == 'X_F' and args.t != 0:
@@ -164,9 +160,7 @@ if args.y_variable == 'X_F' and args.t != 0:
 elif args.y_variable == 'X_F' and args.t == 0:
   ylabel(r'$struct_xx_f$')
 
-if args.y_variable == 'rho' and args.t != 0:
-  ylabel(r'$\rho[t]$')
-elif args.y_variable == 'rho' and args.t == 0:
+if args.y_variable == 'rho':
   ylabel(r'$\rho$')
 
 if args.y_variable == 'DO' and args.t != 0:

@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="Bugfix when we plot versus beta with fixed rho.">
+    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="Now we throw away files if they have rho &gt; =2.1">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/common/extrapolation.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analyzer.py" afterPath="$PROJECT_DIR$/analyzer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/divide_into_classes.py" afterPath="$PROJECT_DIR$/common/divide_into_classes.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="analyzer.iws" />
@@ -26,11 +28,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="analyzer.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="analyzer.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.116178066" vertical-offset="971" max-vertical-offset="5126">
-              <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="1034" max-vertical-offset="4994">
+              <caret line="6" column="78" selection-start-line="6" selection-start-column="78" selection-end-line="6" selection-end-column="78" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="analyzer_min_beta.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analyzer_min_beta.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.31497797" vertical-offset="3542" max-vertical-offset="5478">
+              <caret line="174" column="21" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="extrapolation.py" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/common/extrapolation.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550">
+              <caret line="19" column="10" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -39,8 +61,8 @@
       <file leaf-file-name="divide_into_classes.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="902" max-vertical-offset="1540">
-              <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1562">
+              <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -79,7 +101,7 @@
       <file leaf-file-name="get_file_list.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="836">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="770">
               <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
               <folding />
             </state>
@@ -89,8 +111,8 @@
       <file leaf-file-name="parser.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4686" max-vertical-offset="12078">
-              <caret line="213" column="6" selection-start-line="213" selection-start-column="6" selection-end-line="213" selection-end-column="6" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="11946">
+              <caret line="143" column="18" selection-start-line="143" selection-start-column="18" selection-end-line="143" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -136,10 +158,12 @@
         <option value="$PROJECT_DIR$/tests/test_parser.py" />
         <option value="$PROJECT_DIR$/common/extract_data.py" />
         <option value="$PROJECT_DIR$/common/parser.py" />
-        <option value="$PROJECT_DIR$/common/divide_into_classes.py" />
         <option value="$PROJECT_DIR$/common/merge.py" />
         <option value="$PROJECT_DIR$/settings.py" />
         <option value="$PROJECT_DIR$/analyzer.py" />
+        <option value="$PROJECT_DIR$/common/divide_into_classes.py" />
+        <option value="$PROJECT_DIR$/common/extrapolation.py" />
+        <option value="$PROJECT_DIR$/analyzer_min_beta.py" />
       </list>
     </option>
   </component>
@@ -162,7 +186,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="ProjectPane" proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -173,13 +197,49 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes />
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="analyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="analyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quest-qmc-analyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="analyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="quest-qmc-analyzer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../information_theory_project" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
     <property name="options.searchVisible" value="true" />
@@ -678,7 +738,11 @@
       <created>1403305963484</created>
       <updated>1403305963484</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Now we throw away files if they have rho &gt; =2.1">
+      <created>1403380722498</created>
+      <updated>1403380722498</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -686,7 +750,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.34947369" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14816754" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.150108" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21544716" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -741,7 +805,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="y_label for Energy_hop added." />
     <MESSAGE value="Binder cumulant and magnetisation measurements added to the analyzer." />
     <MESSAGE value="struct_xx_f added to the y-variable measureents." />
     <MESSAGE value="Density-density correlations between different orbitals implemented." />
@@ -766,7 +829,8 @@
     <MESSAGE value="m2, double occupancy and hopping energy added" />
     <MESSAGE value="removed constraint about mu =0 &lt;=&gt; rho=1" />
     <MESSAGE value="Bugfix when we plot versus beta with fixed rho." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfix when we plot versus beta with fixed rho." />
+    <MESSAGE value="Now we throw away files if they have rho &gt; =2.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Now we throw away files if they have rho &gt; =2.1" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -774,22 +838,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/tests/test_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="704" max-vertical-offset="2816">
-          <caret line="32" column="51" selection-start-line="32" selection-start-column="51" selection-end-line="32" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analyzer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2728" max-vertical-offset="5016">
-          <caret line="152" column="30" selection-start-line="152" selection-start-column="30" selection-end-line="152" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1100" max-vertical-offset="1540">
@@ -1111,26 +1159,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="836">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/extract_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1144" max-vertical-offset="2200">
           <caret line="52" column="96" selection-start-line="52" selection-start-column="96" selection-end-line="52" selection-end-column="96" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="25" max-vertical-offset="1540">
-          <caret line="41" column="26" selection-start-line="41" selection-start-column="26" selection-end-line="41" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -1153,16 +1185,48 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/common/parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1343" max-vertical-offset="11946">
-          <caret line="213" column="6" selection-start-line="213" selection-start-column="6" selection-end-line="213" selection-end-column="6" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2310" max-vertical-offset="11946">
+          <caret line="143" column="18" selection-start-line="143" selection-start-column="18" selection-end-line="143" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1562">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="88" max-vertical-offset="836">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/analyzer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.116178066" vertical-offset="971" max-vertical-offset="5126">
-          <caret line="49" column="65" selection-start-line="49" selection-start-column="65" selection-end-line="49" selection-end-column="65" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="110" max-vertical-offset="4994">
+          <caret line="6" column="78" selection-start-line="6" selection-start-column="78" selection-end-line="6" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/extrapolation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550">
+          <caret line="19" column="10" selection-start-line="19" selection-start-column="9" selection-end-line="19" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analyzer_min_beta.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31497797" vertical-offset="3542" max-vertical-offset="5478">
+          <caret line="174" column="21" selection-start-line="174" selection-start-column="21" selection-end-line="174" selection-end-column="21" />
           <folding />
         </state>
       </provider>
