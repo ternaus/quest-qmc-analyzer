@@ -80,6 +80,12 @@ def merge(dict_to_merge, variable):
       temp = [item.get_s_wave()[1] ** 2 for item in dict_to_merge[x]]
       yErr += [math.sqrt(sum(temp)) / len(temp)]
 
+  elif variable == 's-wave_rescaled':
+    for x in xList:
+      yList += [numpy.mean([math.pow(item.get_L(), -7.0 / 4.0) * item.get_s_wave()[0] for item in dict_to_merge[x]])]
+      temp = [(math.pow(item.get_L(), -7.0 / 4.0) * item.get_s_wave()[1]) ** 2 for item in dict_to_merge[x]]
+      yErr += [math.sqrt(sum(temp)) / len(temp)]
+
   elif variable == 'Energy_hop':
     for x in xList:
       E_hop_average = numpy.mean([item.get_energy_hop()[0] for item in dict_to_merge[x]])

@@ -129,9 +129,8 @@ class Parser:
 
   def get_L(self):
     if self.L == None:
-      self.L = math.sqrt(self.get_nSites() / self.get_num_orbits())
-      assert (self.L ** 2 == self.get_nx() * self.get_ny())
-    return self.nx
+      self.L = math.sqrt(self.get_nx() * self.get_ny())
+    return self.L
 
   def get_nx(self):
     if self.nx == None:
@@ -421,8 +420,6 @@ class Parser:
       self.ky_points = list(grid_points_y)
       self.kx_points.sort()
       self.ky_points.sort()
-
-      assert temp == self.get_nSites() / self.get_num_orbits()
 
     return self.k_grid
 

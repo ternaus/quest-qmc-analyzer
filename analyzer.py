@@ -23,6 +23,7 @@ y_variables:
   m0_squared - square of the magnetisation on the 0 orbital
   m1_squares - square of the magnetisation on the 1 orbital
   C - specific heat
+  s-wave_rescaled - L^(-7/4) * Ps
 '''
 import common.get_file_list
 import common.fequals
@@ -163,15 +164,14 @@ elif args.y_variable == 'X_F' and args.t == 0:
 if args.y_variable == 'rho':
   ylabel(r'$\rho$')
 
-if args.y_variable == 'DO' and args.t != 0:
-  ylabel(r'$\left<N_{up} N_{down}\right>[t]$')
-elif args.y_variable == 'rho' and args.t == 0:
-  ylabel(r'$\left<N_{up} N_{down}\right>[t]$')
+if args.y_variable == 'DO':
+  ylabel(r'$\left<N_{up} N_{down}\right>$')
 
-if args.y_variable == 's-wave' and args.t != 0:
-  ylabel(r'$P_s[t]$')
-elif args.y_variable == 's-wave' and args.t == 0:
-  ylabel(r'$P_s[t]$')
+if args.y_variable == 's-wave':
+  ylabel(r'$P_s$')
+
+if args.y_variable == 's-wave_rescaled':
+  ylabel(r'$L^{-7/4} P_s$')
 
 if args.y_variable == '01':
   ylabel(r'$\left<n_0 n_1\right>[t]$')
@@ -197,10 +197,8 @@ if args.y_variable == 'm1_squared' and args.t != 0:
 elif args.y_variable == 'm1_squared' and args.t == 0:
   ylabel(r'$\left<m_1^2 \right>[t]$')
 
-if args.y_variable == 'C' and args.t != 0:
-  ylabel(r'$C[t]$')
-elif args.y_variable == 'm1_squared' and args.t == 0:
-  ylabel(r'$C[t]$')
+if args.y_variable == 'C':
+  ylabel(r'$C$')
 
 if args.legend == 'lr' or args.legend == 'rl':
   legend(loc='lower right', fancybox=True, shadow=True)
