@@ -30,9 +30,15 @@ import common.fequals
 import common.divide_into_classes
 import common.merge
 import common.choices
-import argparse
 from pylab import *
+import argparse
 import os
+import time
+from multiprocessing import Pool
+
+
+p = Pool()
+start_time = time.time()
 
 execfile(os.path.join(os.getcwd(), "common", "plot_properties.py"))
 
@@ -133,6 +139,8 @@ elif args.x_variable == '1L':
 #divide into classes, corresponding to different number of sites
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='nSites')
 
+print 'waste of time = ', time.time() - start_time
+
 #We choose what lattice sizes are we interested in
 nSites_list = common.choices.list_choice(into_nSites_dict.keys())
 
@@ -156,9 +164,7 @@ if args.y_variable == 'Energy':
 if args.y_variable == 'Energy_hop':
   ylabel(r'$Energy_{hop}$')
 
-if args.y_variable == 'X_F' and args.t != 0:
-  ylabel(r'$struct_xx_f[t]$')
-elif args.y_variable == 'X_F' and args.t == 0:
+if args.y_variable == 'X_F':
   ylabel(r'$struct_xx_f$')
 
 if args.y_variable == 'rho':
@@ -182,10 +188,8 @@ if args.y_variable == '12':
 if args.y_variable == '00':
   ylabel(r'$\left<n_{0,(0,0)} n_{0, (1, 0)}\right>[t]$')
 
-if args.y_variable == 'm2' and args.t != 0:
-  ylabel(r'$\left<m^2\right>[t]$')
-elif args.y_variable == 'm2' and args.t == 0:
-  ylabel(r'$\left<m^2\right>[t]$')
+if args.y_variable == 'm2':
+  ylabel(r'$\left<m^2\right>$')
 
 if args.y_variable == 'm0_squared' and args.t != 0:
   ylabel(r'$\left<m_0^2 \right>[t]$')
