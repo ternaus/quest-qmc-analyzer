@@ -80,6 +80,10 @@ class Parser:
     self.FT_pairing_21 = None #Fourier transform of the pairing correlation function for the 21 orbitals
     self.kx_points = None #k points in the x direction
     self.ky_points = None #k points in the y direction
+    self.sign = None  # average sign of the determinant
+    self.sign_up = None  # average sign for the determinant corresponding to the spin up electrons
+    self.sign_down = None  #average sign for the determinant corresponding to the spin down electrons
+
 
   def get_num_orbits(self):
     if self.num_orbits == None:
@@ -214,7 +218,9 @@ class Parser:
     if self.rho == None:
       m = re.search('(?<=Density :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
       self.rho = (float(m.groups()[0]), float(m.groups()[1]))
-      assert round(self.get_n_up()[0] + self.get_n_down()[0] - self.get_rho()[0], 7) == 0
+      if round(self.get_n_up()[0] + self.get_n_down()[0] - self.rho[0], 6) != 0:
+        print self.get_n_up(), self.get_n_down(), self.rho
+      assert round(self.get_n_up()[0] + self.get_n_down()[0] - self.rho[0], 6) == 0
     return self.rho
 
   def get_C(self):
@@ -234,6 +240,25 @@ class Parser:
       m = re.search('(?<=Total energy :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
       self.energy = (float(m.groups()[0]), float(m.groups()[1]))
     return self.energy
+
+  def get_sign(self):
+    if self.sign == None:
+      m = re.search('(?<=Avg sign :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
+      self.sign = (float(m.groups()[0]), float(m.groups()[1]))
+    return self.sign
+
+  def get_sign_up(self):
+    if self.sign_up == None:
+      m = re.search('(?<=Avg up sign :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
+      self.sign_up = (float(m.groups()[0]), float(m.groups()[1]))
+    return self.sign_up
+
+  def get_sign_down(self):
+    if self.sign_down == None:
+      m = re.search('(?<=Avg dn sign :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
+      self.sign_down = (float(m.groups()[0]), float(m.groups()[1]))
+    return self.sign_down
+
 
   def get_struct_XX_F(self):
     if self.struct_XX_F == None:

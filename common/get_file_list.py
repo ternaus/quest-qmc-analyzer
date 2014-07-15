@@ -1,10 +1,7 @@
 from __future__ import division
 import os
-import multiprocessing
 
 import parser
-
-pool = multiprocessing.Pool()
 
 __author__ = 'vladimir'
 

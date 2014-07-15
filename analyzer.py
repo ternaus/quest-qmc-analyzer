@@ -49,7 +49,11 @@ parser.add_argument('-u', type=float, help="u term")
 parser.add_argument('-beta', type=float, help="inverse temperature")
 
 parser.add_argument('-m', type=str, help="Name of the model")
-parser.add_argument('-y_variable', type=str, help="variable along y axis")
+parser.add_argument('-y_variable', type=str, help="""variable along y axis can be
+sign - average sign of the determinant
+sign_up - average sign of the determinant for spin up electrons
+sign_down - average sign of the determinant for spin down electrons""")
+
 parser.add_argument('-x_variable', type=str, help="variable along x axis")
 parser.add_argument('-x_min', type=float, help='minimum x value')
 parser.add_argument('-x_max', type=float, help='maximum x value')
@@ -71,10 +75,11 @@ path = os.path.join(folder_with_different_models, modelName)
 dataList = common.get_file_list.get_filelist(modelName, path)
 
 #Clean up datafiles that are for sure bad. No moves were performed.
-dataList = [item for item in dataList if ((item.get_global_sites() > 0 and item.get_global_accept > 0) or item.get_global_sites() == 0)]
+dataList = (item for item in dataList if
+            ((item.get_global_sites() > 0 and item.get_global_accept > 0) or item.get_global_sites() == 0))
 
 # Clean up datafiles that are for sure bad. Electron density rho is bounded by 0 and 2.
-dataList = [item for item in dataList if (item.get_rho()[0] < 2.1)]
+dataList = (item for item in dataList if (item.get_rho()[0] < 2.1))
 
 #Not using files, that they have mu = 0 and 0 global moves, when u is not zero.
 # dataList = [item for item in dataList if
@@ -111,15 +116,15 @@ elif args.x_variable == 'mu':
 elif args.x_variable == 'rho':
   xlabel(r'$\rho[t]$')
   title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t), fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
                                             and common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_beta(), args.beta))]
+                                            and common.fequals.equals(item.get_beta(), args.beta)))
 elif args.x_variable == 'beta':
   xlabel(r'$\beta[t]$')
   title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
                                             and common.fequals.equals(item.get_u(), args.u)
-                                            and (abs(item.get_rho()[0] - args.rho)) < 0.02 + item.get_rho()[1])]
+                                            and (abs(item.get_rho()[0] - args.rho)) < 0.02 + item.get_rho()[1]))
 
 elif args.x_variable == 'T':
   xlabel(r'$T[t]$')
@@ -200,6 +205,10 @@ if args.y_variable == 'm1_squared' and args.t != 0:
   ylabel(r'$\left<m_1^2 \right>[t]$')
 elif args.y_variable == 'm1_squared' and args.t == 0:
   ylabel(r'$\left<m_1^2 \right>[t]$')
+
+if args.y_variable == 'sign':
+  ylabel(r'$\left<sign \right>$')
+
 
 if args.y_variable == 'C':
   ylabel(r'$C$')
