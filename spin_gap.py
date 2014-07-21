@@ -41,6 +41,10 @@ parser.add_argument('-legend', type=str, help='legend position. Possible values:
 args = parser.parse_args(sys.argv[1:])
 modelName = args.m
 
+if args.m == 'Lieb' or args.m == 'kagome_anisotropic':
+  axvline(x=2 / 3, linestyle='--', color='black', linewidth=3)
+  axvline(x=4 / 3, linestyle='--', color='black', linewidth=3)
+
 execfile('settings.py')
 execfile(args.file)
 

@@ -1,7 +1,10 @@
 from __future__ import division
 import os
 
+from joblib import Parallel, delayed
+
 import parser
+
 
 __author__ = 'vladimir'
 
@@ -29,7 +32,7 @@ def helper_function(fName):
 
 def get_filelist(modelName, path):
   # return pool.map_async(helper_function, get_filelist_temp(modelName, path))
-  return map(helper_function, get_filelist_temp(modelName, path))
-  # return Parallel(n_jobs=2)(delayed(helper_function)(tx) for tx in get_filelist_temp(modelName, path))
-  # return Parallel()(delayed(helper_function)(tx) for tx in get_filelist_temp(modelName, path))
+  # return map(helper_function, get_filelist_temp(modelName, path))
+  # return Parallel(n_jobs=3)(delayed(helper_function)(tx) for tx in get_filelist_temp(modelName, path))
+  return Parallel()(delayed(helper_function)(tx) for tx in get_filelist_temp(modelName, path))
 

@@ -81,6 +81,10 @@ dataList = (item for item in dataList if
 # Clean up datafiles that are for sure bad. Electron density rho is bounded by 0 and 2.
 dataList = (item for item in dataList if (item.get_rho()[0] < 2.1))
 
+# Clean up datafiles that have average sign less than 0.05
+
+dataList = (item for item in dataList if (item.get_sign()[0] > 0.05))
+
 #Not using files, that they have mu = 0 and 0 global moves, when u is not zero.
 # dataList = [item for item in dataList if
 #             ((
@@ -98,7 +102,11 @@ else:
 #     dataList = [item for item in dataList if (abs(item.get_rho()[0] - 1) <= 0.03)]
 
 # We need to remove datapoints if s-wave errorbars > 20%
-dataList = [item for item in dataList if (abs(item.get_s_wave()[1] / item.get_s_wave()[0]) < 0.2)]
+dataList = (item for item in dataList if (abs(item.get_s_wave()[1] / item.get_s_wave()[0]) < 0.2))
+
+if (args.m == 'Lieb' or args.m == 'kagome_anisotropic') and args.y_variable == 'rho':
+  axhline(y=2 / 3, linestyle='--', color='black', linewidth=3)
+  axhline(y=4 / 3, linestyle='--', color='black', linewidth=3)
 
 if args.x_variable == 'u':
   xlabel(r'$U[t]$')
@@ -119,6 +127,10 @@ elif args.x_variable == 'rho':
   dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
                                             and common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_beta(), args.beta)))
+  if args.m == 'Lieb' or args.m == 'kagome_anisotropic':
+    axvline(x=2 / 3, linestyle='--', color='black', linewidth=3)
+    axvline(x=4 / 3, linestyle='--', color='black', linewidth=3)
+
 elif args.x_variable == 'beta':
   xlabel(r'$\beta[t]$')
   title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
@@ -208,6 +220,9 @@ elif args.y_variable == 'm1_squared' and args.t == 0:
 
 if args.y_variable == 'sign':
   ylabel(r'$\left<sign \right>$')
+
+if args.y_variable == 'sign_up':
+  ylabel(r'$\left<sign_{\uparrow} \right>$')
 
 
 if args.y_variable == 'C':
