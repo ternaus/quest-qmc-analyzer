@@ -31,6 +31,7 @@ def merge(dict_to_merge, variable):
     m0_squared - square of the magnetisation on the 0 orbital
     m1_squared - square of the magnetisation on the 1 orbital
     C - specific heat
+    m2_rho - magnetisation squared divided by rho
   @return:
     xList - sorted list of the keys
     yList - list of corresponding y values
@@ -104,6 +105,14 @@ def merge(dict_to_merge, variable):
       if sum(temp) == 0:
         temp = [(item.get_m2()[0] - m2_average) ** 2 for item in dict_to_merge[x]]
       yErr += [math.sqrt(sum(temp)) / len(temp)]
+
+  elif variable == 'm2_rho':
+    for x in xList:
+      m2_rho_average = numpy.mean([item.get_m2()[0] / item.get_rho()[0] for item in dict_to_merge[x]])
+      yList += [m2_rho_average]
+      temp = [item.get_m2()[1] ** 2 for item in dict_to_merge[x]]
+      yErr += [math.sqrt(sum(temp)) / len(temp)]
+
 
   elif variable == 'm':
     for x in xList:

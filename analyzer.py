@@ -52,7 +52,8 @@ parser.add_argument('-m', type=str, help="Name of the model")
 parser.add_argument('-y_variable', type=str, help="""variable along y axis can be
 sign - average sign of the determinant
 sign_up - average sign of the determinant for spin up electrons
-sign_down - average sign of the determinant for spin down electrons""")
+sign_down - average sign of the determinant for spin down electrons
+m2_rho - m2 divided by rho.""")
 
 parser.add_argument('-x_variable', type=str, help="variable along x axis")
 parser.add_argument('-x_min', type=float, help='minimum x value')
@@ -207,6 +208,10 @@ if args.y_variable == '00':
 
 if args.y_variable == 'm2':
   ylabel(r'$\left<m^2\right>$')
+
+if args.y_variable == 'm2_rho':
+  ylabel(r'$\left<m^2 / \rho\right>$')
+
 
 if args.y_variable == 'm0_squared' and args.t != 0:
   ylabel(r'$\left<m_0^2 \right>[t]$')
