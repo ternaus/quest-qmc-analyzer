@@ -23,6 +23,9 @@ class TestParser(TestCase):
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'square_1408910850.74.out')).read()
     self.square = common.parser.Parser(self.time_indep_text)
 
+    self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'honeycomb_1408666691.0.out')).read()
+    self.honeycomb = common.parser.Parser(self.time_indep_text)
+
 
   def test_get_t_up(self):
     self.assertAlmostEqual(1, self.tparser.get_t_up())
@@ -120,9 +123,17 @@ class TestParser(TestCase):
     print self.tparser.get_FT_pairing_00()
 
   def test_nx(self):
+    self.assertEquals(12, self.tparser1.get_nx())
     self.assertEquals(4, self.tparser.get_nx())
     self.assertEquals(2, self.square.get_nx())
+    self.assertEquals(4, self.kagome.get_nx())
+    # TODO nx_ny from non rectangular geometry is not supported
+    self.assertEquals(10, self.honeycomb.get_nx())
 
   def test_ny(self):
+    self.assertEquals(12, self.tparser1.get_ny())
     self.assertEquals(4, self.tparser.get_ny())
     self.assertEquals(48, self.square.get_ny())
+    self.assertEquals(4, self.kagome.get_ny())
+    # TODO nx_ny from non rectangular geometry is not supported
+    self.assertEquals(10, self.honeycomb.get_ny())

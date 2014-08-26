@@ -119,6 +119,7 @@ class Parser:
   def get_nSites(self):
     if self.nSites == None:
       self.nSites = int(re.search('(?<=Number of sites :)\s+.?\d+', self.fileText).group(0))
+      assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
     return self.nSites
 
   def get_global_sites(self):

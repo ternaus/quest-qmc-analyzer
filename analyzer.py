@@ -163,25 +163,26 @@ elif args.x_variable == '1L':
                                             and common.fequals.equals(item.get_beta(), args.beta))]
 
 #divide into classes, corresponding to different number of sites
-into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='nSites')
+into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='shape')
 
 print 'waste of time = ', time.time() - start_time
 
 #We choose what lattice sizes are we interested in
-nSites_list = common.choices.list_choice(into_nSites_dict.keys())
+shape_list = common.choices.list_choice(into_nSites_dict.keys())
 
-for nSites in nSites_list:
-  splitted = common.divide_into_classes.divide_into_classes(into_nSites_dict[nSites], parameter=args.x_variable)
+for shape in shape_list:
+  splitted = common.divide_into_classes.divide_into_classes(into_nSites_dict[shape], parameter=args.x_variable)
   xList, yList, yErr = common.merge.merge(splitted, args.y_variable)
 
   if args.x_variable == 'T':
     xList = [1 / tx for tx in xList]
 
-  errorbar(xList, yList, yerr=yErr, fmt='D-', label='nSites = {nSites}'.format(nSites=nSites), linewidth=3,
+  errorbar(xList, yList, yerr=yErr, fmt='D-', label=r'${nx} \times {ny}$'.format(nx=shape[0], ny=shape[1]), linewidth=3,
            markersize=15)
   if args.to_screen:
     print
-    print 'N = ', nSites
+    print 'N = ', shape[2]
+    print 'nx = ', shape[0], ',ny = ', shape[1]
     print 'xList = ', xList
     print 'yList = ', yList
     print 'yErr = ', yErr
