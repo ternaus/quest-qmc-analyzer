@@ -182,7 +182,8 @@ for shape in shape_list:
   if args.to_screen:
     print
     print 'N = ', shape[2]
-    print 'nx = ', shape[0], ',ny = ', shape[1]
+    print 'nx = ', shape[0]
+    print 'ny = ', shape[1]
     print 'xList = ', xList
     print 'yList = ', yList
     print 'yErr = ', yErr
