@@ -205,5 +205,12 @@ def merge(dict_to_merge, variable):
       temp = [item.get_sign_down()[1] ** 2 for item in dict_to_merge[x]]
       yErr += [math.sqrt(sum(temp)) / len(temp)]
 
+  elif variable == 'sign_normalized':
+    for x in xList:
+      yList += [numpy.mean([item.get_sign_normalized()[0] for item in dict_to_merge[x]])]
+      temp = [item.get_sign_normalized()[1] ** 2 for item in dict_to_merge[x]]
+      yErr += [math.sqrt(sum(temp)) / len(temp)]
+
+
   return xList, yList, yErr
 

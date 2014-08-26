@@ -58,6 +58,8 @@ def divide_into_classes(datList, **kwargs):
       # rho = round(victim.get_rho()[0], 2)
       # rho = int(50 * victim.get_rho()[0]) / 50
       rho = int(70 * victim.get_rho()[0]) / 70
+      # rho = victim.get_rho()[0]
+      # rho = int(10000 * victim.get_rho()[0]) / 10000
       if rho not in result:
         result[rho] = [victim]
       else:

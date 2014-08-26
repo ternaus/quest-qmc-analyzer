@@ -83,6 +83,7 @@ class Parser:
     self.sign = None  # average sign of the determinant
     self.sign_up = None  # average sign for the determinant corresponding to the spin up electrons
     self.sign_down = None  #average sign for the determinant corresponding to the spin down electrons
+    self.sign_normalized = None  # <S> - <S_up> <S_dn>
 
 
   def get_num_orbits(self):
@@ -258,6 +259,14 @@ class Parser:
       m = re.search('(?<=Avg dn sign :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
       self.sign_down = (float(m.groups()[0]), float(m.groups()[1]))
     return self.sign_down
+
+  def get_sign_normalized(self):
+    if self.sign_normalized == None:
+      self.sign_normalized = (self.get_sign()[0] - self.get_sign_up()[0] * self.get_sign_down()[0],
+                              math.sqrt(
+                                self.get_sign()[1] ** 2 + self.get_sign_down()[0] ** 2 * self.get_sign_up()[1] ** 2 +
+                                self.get_sign_up()[0] ** 2 * self.get_sign_down()[1] ** 2))
+    return self.sign_normalized
 
 
   def get_struct_XX_F(self):

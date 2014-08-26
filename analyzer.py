@@ -86,7 +86,7 @@ dataList = (item for item in dataList if
 # Clean up datafiles that are for sure bad. Electron density rho is bounded by 0 and 2.
 
 
-# dataList = (item for item in dataList if (item.get_rho()[0] <= 2))
+dataList = (item for item in dataList if (0 <= item.get_rho()[0] <= 2))
 
 # Clean up datafiles that have average sign less than 0.05
 
@@ -97,7 +97,8 @@ dataList = (item for item in dataList if
 #             ((
 #              item.get_u() != 0 and item.get_mu_up() == 0 and item.get_global_sites() > 0) or item.get_u() == 0 or item.get_mu_up() != 0)]
 
-if args.m == 'Lieb' or args.m == 'square':
+bipartite_list = ['Lieb', 'square', 'honeycomb']
+if args.m in bipartite_list:
   bipartite = True
 else:
   bipartite = False
@@ -221,6 +222,9 @@ if args.y_variable == 'm2':
 if args.y_variable == 'm2_rho':
   ylabel(r'$\left<m^2 / \rho\right>$')
 
+if args.y_variable == 'sign_normalized':
+  ylabel(
+    r'$\left<sign_{\uparrow} sign_{\downarrow} \right> - \left< sign_{\uparrow} \right> \left< sign_{\downarrow} \right>$')
 
 if args.y_variable == 'm0_squared' and args.t != 0:
   ylabel(r'$\left<m_0^2 \right>[t]$')
