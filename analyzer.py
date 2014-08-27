@@ -77,8 +77,6 @@ path = os.path.join(folder_with_different_models, modelName)
 
 dataList = common.get_file_list.get_filelist(modelName, path)
 
-
-
 #Clean up datafiles that are for sure bad. No moves were performed.
 dataList = (item for item in dataList if
                 ((item.get_global_sites() > 0 and item.get_global_accept > 0) or item.get_global_sites() == 0))
@@ -97,7 +95,7 @@ dataList = (item for item in dataList if (0 <= item.get_rho()[0] <= 2))
 #             ((
 #              item.get_u() != 0 and item.get_mu_up() == 0 and item.get_global_sites() > 0) or item.get_u() == 0 or item.get_mu_up() != 0)]
 
-bipartite_list = ['Lieb', 'square', 'honeycomb']
+bipartite_list = ['Lieb', 'square', 'honeycomb', 'chain']
 if args.m in bipartite_list:
   bipartite = True
 else:

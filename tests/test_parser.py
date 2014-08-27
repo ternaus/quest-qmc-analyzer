@@ -20,7 +20,7 @@ class TestParser(TestCase):
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'kagome_anisotropic_1397688531.07.out')).read()
     self.kagome = common.parser.Parser(self.time_indep_text)
 
-    self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'square_1408910850.74.out')).read()
+    self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'square_1409090541.43.out')).read()
     self.square = common.parser.Parser(self.time_indep_text)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'honeycomb_1408666691.0.out')).read()
@@ -134,6 +134,10 @@ class TestParser(TestCase):
     self.assertEquals(12, self.tparser1.get_ny())
     self.assertEquals(4, self.tparser.get_ny())
     self.assertEquals(48, self.square.get_ny())
+    print self.square.get_nx()
+    print self.square.get_ny()
+    print self.square.get_u()
+    print self.square.get_beta()
     self.assertEquals(4, self.kagome.get_ny())
     # TODO nx_ny from non rectangular geometry is not supported
     self.assertEquals(10, self.honeycomb.get_ny())
