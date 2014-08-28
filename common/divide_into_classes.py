@@ -26,7 +26,10 @@ def divide_into_classes(datList, **kwargs):
   elif kwargs['parameter'] == 'shape':
     for victim in datList:
       nx = victim.get_nx()
-      ny = victim.get_ny()
+      if victim.dimension == 1:
+        ny = 1
+      else:
+        ny = victim.get_ny()
       shape = (min(nx, ny), max(nx, ny), victim.get_nSites())
       if shape not in result:
         result[shape] = [victim]

@@ -12,19 +12,24 @@ class TestParser(TestCase):
   def setUp(self):
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'Lieb_1385474159.53.out')).read()
     self.time_dep_text = open(os.path.join(os.getcwd(), 'data', 'Lieb_1385474159.53.tdm.out')).read()
-    self.tparser = common.parser.Parser(self.time_indep_text, tdm=self.time_dep_text)
+    dimension = 2
+    self.tparser = common.parser.Parser(self.time_indep_text, tdm=self.time_dep_text, dimension=dimension)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'Lieb_1387496388.34.out')).read()
-    self.tparser1 = common.parser.Parser(self.time_indep_text)
+    self.tparser1 = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'kagome_anisotropic_1397688531.07.out')).read()
-    self.kagome = common.parser.Parser(self.time_indep_text)
+    self.kagome = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'square_1409090541.43.out')).read()
-    self.square = common.parser.Parser(self.time_indep_text)
+    self.square = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'honeycomb_1408666691.0.out')).read()
-    self.honeycomb = common.parser.Parser(self.time_indep_text)
+    self.honeycomb = common.parser.Parser(self.time_indep_text, dimension=dimension)
+
+    self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'chain_1409178597.79.out')).read()
+    dimension = 1
+    self.chain = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
 
   def test_get_t_up(self):
@@ -127,6 +132,7 @@ class TestParser(TestCase):
     self.assertEquals(4, self.tparser.get_nx())
     self.assertEquals(2, self.square.get_nx())
     self.assertEquals(4, self.kagome.get_nx())
+    self.assertEquals(8, self.chain.get_nx())
     # TODO nx_ny from non rectangular geometry is not supported
     self.assertEquals(10, self.honeycomb.get_nx())
 

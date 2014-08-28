@@ -35,6 +35,7 @@ def extract_tdm_data(victim, **kwargs):
 
 def extract_non_tdm_data(victim, **kwargs):
   parameter = kwargs['parameter']
+  dimension = kwargs['dimension']
 
   temp = victim.strip().split('====================================')
   temp1 = []
@@ -82,13 +83,22 @@ def extract_non_tdm_data(victim, **kwargs):
         tx += [float(ttx)]
       temp1 += [tx]
 
-    result = {}
-    for line in temp1:
-      if len(line) == 3:
-        key = int(line[0])
-        result[key] = [(line[1], line[2])]
-      elif len(line) == 2:
-        result[key] += [(line[0], line[1])]
+    key = 'temp'
 
+    result = {}
+    if dimension == 1:
+      for line in temp1:
+        if len(line) == 2:
+          key = int(line[0])
+          result[key] = [line[1]]
+        elif len(line) == 1:
+          result[key] += [line[0]]
+    elif dimension == 2:
+      for line in temp1:
+        if len(line) == 3:
+          key = int(line[0])
+          result[key] = [(line[1], line[2])]
+        elif len(line) == 2:
+          result[key] += [(line[0], line[1])]
   return result
 

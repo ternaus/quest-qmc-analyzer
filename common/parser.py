@@ -19,6 +19,7 @@ __author__ = 'vladimir'
 class Parser:
   def __init__(self, fileText, **kwargs):
     self.fileText = fileText
+    self.dimension = kwargs['dimension']
 
     if 'tdm' in kwargs:
       self.fileText_tdm = kwargs['tdm']
@@ -119,7 +120,10 @@ class Parser:
   def get_nSites(self):
     if self.nSites == None:
       self.nSites = int(re.search('(?<=Number of sites :)\s+.?\d+', self.fileText).group(0))
-      assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
+      if self.dimension == 2:
+        assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
+      elif self.dimension == 1:
+        assert (self.nSites == self.get_nx())
     return self.nSites
 
   def get_global_sites(self):
@@ -296,7 +300,7 @@ class Parser:
 
   def get_pairing(self):
     if self.pairing == None:
-      self.pairing = common.extract_data.extract_non_tdm_data(self.fileText, parameter='Pairing correlation function:')
+      self.pairing = common.extract_data.extract_non_tdm_data(self.fileText, parameter='Pairing correlation function:', dimension=self.dimension)
     return self.pairing
 
   def get_SxSx_tdm(self):
@@ -442,15 +446,19 @@ class Parser:
   def get_k_grid(self):
     if self.k_grid == None:
       self.k_grid = common.extract_data.extract_non_tdm_data(self.fileText,
-                                                             parameter="Grid for Green's function", k_grid=True)
+                                                             parameter="Grid for Green's function", k_grid=True, dimension=self.dimension)
       grid_points_x = set()
       grid_points_y = set()
       temp = 0 #We need to check if number of k points in the k_grid is equal to the number of unit cells
       for item in self.k_grid.values():
         temp += len(item)
-        for (kx, ky) in item:
-          grid_points_x.add(kx)
-          grid_points_y.add(ky)
+        if self.dimension == 2:
+          for (kx, ky) in item:
+            grid_points_x.add(kx)
+            grid_points_y.add(ky)
+        elif self.dimension == 1:
+          for kx in item:
+            grid_points_x.add(kx)
       self.kx_points = list(grid_points_x)
       self.ky_points = list(grid_points_y)
       self.kx_points.sort()

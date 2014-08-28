@@ -23,9 +23,10 @@ def get_filelist_temp(modelName, path):
   return potential_files
 
 
-def helper_function(fName):
+def helper_function(fName, **kwargs):
+  dimension = kwargs['dimension']
   toOpen_indep = open(fName)
-  p = parser.Parser(toOpen_indep.read())  
+  p = parser.Parser(toOpen_indep.read(), dimension=dimension)
   try:
     p.get_rho()
   except:
@@ -35,9 +36,7 @@ def helper_function(fName):
   return p
 
 
-def get_filelist(modelName, path):
-  # return pool.map_async(helper_function, get_filelist_temp(modelName, path))
-  return map(helper_function, get_filelist_temp(modelName, path))
-  # return Parallel(n_jobs=3)(delayed(helper_function)(tx) for tx in get_filelist_temp(modelName, path))
-  # return Parallel()(delayed(helper_function)(tx) for tx in get_filelist_temp(modelName, path))
+def get_filelist(modelName, path, **kwargs):
+  dimension = kwargs['dimension']
+  return (helper_function(tx, dimension=dimension) for tx in get_filelist_temp(modelName, path))
 

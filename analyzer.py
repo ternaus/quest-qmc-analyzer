@@ -66,7 +66,7 @@ parser.add_argument('-T', action="store_true",
                     help="if we need graph versus temperature. By default it is versus inverse temperature.")
 parser.add_argument('-legend', type=str, help='legend position. Possible values: lr, ur, ll, ul')
 
-parser.add_argument('-filter', type=bool, default=True, help='Do we filter the data or not. Default True')
+parser.add_argument('-filter', type=bool, help='Do we filter the data or not. Default True')
 
 args = parser.parse_args(sys.argv[1:])
 modelName = args.m
@@ -75,7 +75,12 @@ execfile('settings.py')
 
 path = os.path.join(folder_with_different_models, modelName)
 
-dataList = common.get_file_list.get_filelist(modelName, path)
+if args.m == 'chain':
+  dimension = 1
+else:
+  dimension = 2
+
+dataList = common.get_file_list.get_filelist(modelName, path, dimension=dimension)
 
 #Clean up datafiles that are for sure bad. No moves were performed.
 dataList = (item for item in dataList if
@@ -129,7 +134,7 @@ elif args.x_variable == 'mu':
                                             and common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_beta(), args.beta))]
 elif args.x_variable == 'rho':
-  xlabel(r'$\rho[t]$')
+  xlabel(r'$\rho$')
   title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t), fontsize=30)
   dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
                                             and common.fequals.equals(item.get_u(), args.u)
