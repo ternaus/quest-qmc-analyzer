@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="chain added to the analyzer. Does not work.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analyzer.py" afterPath="$PROJECT_DIR$/analyzer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/divide_into_classes.py" afterPath="$PROJECT_DIR$/common/divide_into_classes.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/extract_data.py" afterPath="$PROJECT_DIR$/common/extract_data.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/get_file_list.py" afterPath="$PROJECT_DIR$/common/get_file_list.py" />
+    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="First step in the direction of making several t is done.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/parser.py" afterPath="$PROJECT_DIR$/common/parser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/test_parser.py" afterPath="$PROJECT_DIR$/tests/test_parser.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="analyzer.iws" />
@@ -34,7 +29,7 @@
       <file leaf-file-name="get_file_list.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="397" max-vertical-offset="946">
+            <state vertical-scroll-proportion="0.0" vertical-offset="726" max-vertical-offset="1056">
               <caret line="33" column="20" selection-start-line="33" selection-start-column="20" selection-end-line="33" selection-end-column="20" />
               <folding />
             </state>
@@ -84,18 +79,18 @@
       <file leaf-file-name="extract_data.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/extract_data.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1578" max-vertical-offset="2398">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2178" max-vertical-offset="2420">
               <caret line="99" column="24" selection-start-line="99" selection-start-column="24" selection-end-line="99" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parser.py" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="parser.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="9812" max-vertical-offset="12826">
-              <caret line="460" column="33" selection-start-line="460" selection-start-column="33" selection-end-line="460" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.38653636" vertical-offset="1558" max-vertical-offset="12870">
+              <caret line="94" column="18" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
               <folding />
             </state>
           </provider>
@@ -104,7 +99,7 @@
       <file leaf-file-name="test_parser.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="3322">
+            <state vertical-scroll-proportion="0.0" vertical-offset="308" max-vertical-offset="3410">
               <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
               <folding />
             </state>
@@ -121,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="analyzer.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="analyzer.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/analyzer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8562874" vertical-offset="1210" max-vertical-offset="6072">
-              <caret line="68" column="42" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="6072">
+              <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -166,17 +161,18 @@
         <option value="$PROJECT_DIR$/common/merge.py" />
         <option value="$PROJECT_DIR$/common/get_file_list.py" />
         <option value="$PROJECT_DIR$/tests/test_parser.py" />
-        <option value="$PROJECT_DIR$/common/parser.py" />
         <option value="$PROJECT_DIR$/common/divide_into_classes.py" />
         <option value="$PROJECT_DIR$/common/extract_data.py" />
         <option value="$PROJECT_DIR$/analyzer.py" />
+        <option value="$PROJECT_DIR$/common/parser.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="180" />
-    <option name="width" value="790" />
-    <option name="height" value="890" />
+    <option name="x" value="1600" />
+    <option name="y" value="24" />
+    <option name="width" value="1910" />
+    <option name="height" value="1022" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -764,14 +760,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="180" width="790" height="890" extended-state="0" />
+    <frame x="1600" y="24" width="1910" height="1022" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31578946" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8732719" sideWeight="0.21937172" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4816626" sideWeight="0.78062826" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4816626" sideWeight="0.78062826" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -803,7 +799,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="FT of pairing 00 and 01 works." />
     <MESSAGE value="FT of pairing 00 and 10, 11, 21 added." />
     <MESSAGE value="FT of pairing 00 and 10, 11, 21 added and presumably they work." />
     <MESSAGE value="Extra normalization from the s-wave structure factor removed." />
@@ -828,7 +823,8 @@
     <MESSAGE value="Switched to shape instead of just num_sites.&#10;&#10;There is a bug. Analyzer does not extract nx, ny properly for non rectangular geometry." />
     <MESSAGE value="small change in the output" />
     <MESSAGE value="chain added to the analyzer. Does not work." />
-    <option name="LAST_COMMIT_MESSAGE" value="chain added to the analyzer. Does not work." />
+    <MESSAGE value="First step in the direction of making several t is done." />
+    <option name="LAST_COMMIT_MESSAGE" value="First step in the direction of making several t is done." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1180,14 +1176,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="9812" max-vertical-offset="12826">
-          <caret line="460" column="33" selection-start-line="460" selection-start-column="33" selection-end-line="460" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="397" max-vertical-offset="946">
@@ -1214,8 +1202,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/analyzer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8562874" vertical-offset="1210" max-vertical-offset="6072">
-          <caret line="68" column="42" selection-start-line="68" selection-start-column="42" selection-end-line="68" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="6072">
+          <caret line="60" column="22" selection-start-line="60" selection-start-column="22" selection-end-line="60" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.38653636" vertical-offset="1580" max-vertical-offset="12892">
+          <caret line="94" column="18" selection-start-line="94" selection-start-column="18" selection-end-line="94" selection-end-column="18" />
           <folding />
         </state>
       </provider>
