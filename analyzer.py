@@ -14,6 +14,7 @@ x_variables:
   x - fixed u, mu, beta
   1L - plot versus 1 / L. fixed u, mu, beta
   rho - plot versus rho. fixed u, beta
+  num_sites - plot versus number of sites. fixed rho, u, beta
 
 y_variables:
   Energy
@@ -179,6 +180,17 @@ elif args.x_variable == '1L':
   dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_rho()[0], args.rho)
                                             and common.fequals.equals(item.get_beta(), args.beta))]
+
+elif args.x_variable == 'num_sites':
+  xlabel(r'number of sites')
+  title(
+    r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
+                                                                                modelname=args.m, t=args.t),
+    fontsize=30)
+  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                            and common.fequals.equals(item.get_rho()[0], args.rho)
+                                            and common.fequals.equals(item.get_beta(), args.beta))]
+
 
 #divide into classes, corresponding to different number of sites
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='shape')

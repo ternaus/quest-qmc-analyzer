@@ -66,6 +66,13 @@ def divide_into_classes(datList, **kwargs):
       else:
         result[victim.get_u()] += [victim]
 
+  elif kwargs['parameter'] == 'num_sites':
+    for victim in datList:
+      if victim.get_nSites() not in result:
+        result[victim.get_nSites()] = [victim]
+      else:
+        result[victim.get_nSites()] += [victim]
+
   elif kwargs['parameter'] == 'rho':
     for victim in datList:
       # rho = round(victim.get_rho()[0], 2)
