@@ -102,13 +102,13 @@ class Parser:
       self.t_up = re.search('t_up :.*', self.fileText).group(0).replace('t_up :', '').strip().split()
       self.t_up = [float(tx) for tx in self.t_up]
 
-    return self.t_up[0]
+    return self.t_up
 
   def get_t_down(self):
     if self.t_down == None:
       self.t_down = re.search('t_dn :.*', self.fileText).group(0).replace('t_up :', '').strip().split()
       self.t_down = [float(tx) for tx in self.t_down]
-    return self.t_down[0]
+    return self.t_down
 
   def get_mu_up(self):
     if self.mu_up == None:

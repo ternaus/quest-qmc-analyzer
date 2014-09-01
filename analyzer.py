@@ -44,6 +44,7 @@ execfile(os.path.join(os.getcwd(), "common", "plot_properties.py"))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', type=float, default=1, help="hopping strength t")
+parser.add_argument('-t1', type=float, default=0, help="extra hopping strength t1")
 parser.add_argument('-rho', type=float, help="Electron density")
 parser.add_argument('-u', type=float, help="u term")
 parser.add_argument('-beta', type=float, help="inverse temperature")
@@ -120,24 +121,41 @@ if (args.m == 'Lieb' or args.m == 'kagome_anisotropic') and args.y_variable == '
   axhline(y=2 / 3, linestyle='--', color='black', linewidth=3)
   axhline(y=4 / 3, linestyle='--', color='black', linewidth=3)
 
+# Filter t
+dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[0], args.t)))
+#Filter t'
+if 'anisotropic' in args.m:
+  dataList_temp = []
+  for item in dataList:
+    try:
+      item.get_t_up()[1]
+    except:
+      if args.t1 == 1:
+        dataList_temp += [item]
+    else:
+      if args.t1 == item.get_t_up()[1]:
+        dataList_temp += [item]
+  dataList = dataList_temp
+  print dataList[-1].get_t_up()
+  # dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[1], args.t1)))
+
 if args.x_variable == 'u':
   xlabel(r'$U[t]$')
   title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m, t=args.t),
         fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
-                                            and common.fequals.equals(item.get_beta(), args.beta)
-                                            and common.fequals.equals(item.get_mu_up(), args.mu))]
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
+                                            and common.fequals.equals(item.get_mu_up(), args.mu)))
 elif args.x_variable == 'mu':
   xlabel(r'$\mu[t]$')
   title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t), fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
-                                            and common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_beta(), args.beta))]
+  dataList = (item for item in dataList if
+              (common.fequals.equals(item.get_u(), args.u) and common.fequals.equals(item.get_beta(), args.beta)))
+
 elif args.x_variable == 'rho':
   xlabel(r'$\rho$')
-  title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t), fontsize=30)
-  dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
-                                            and common.fequals.equals(item.get_u(), args.u)
+  title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m,
+                                                                    t=[args.t, args.t1]), fontsize=30)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_beta(), args.beta)))
   if args.m == 'Lieb' or args.m == 'kagome_anisotropic':
     axvline(x=2 / 3, linestyle='--', color='black', linewidth=3)
@@ -146,22 +164,19 @@ elif args.x_variable == 'rho':
 elif args.x_variable == 'beta':
   xlabel(r'$\beta[t]$')
   title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
-  dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
-                                            and common.fequals.equals(item.get_u(), args.u)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                             and (abs(item.get_rho()[0] - args.rho)) < 0.02 + item.get_rho()[1]))
 
 elif args.x_variable == 'T':
   xlabel(r'$T[t]$')
   title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
-                                            and common.fequals.equals(item.get_u(), args.u)
+  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_mu_up(), args.mu))]
 elif args.x_variable == '1L':
   xlabel(r'$1 / L$')
   title(r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
                                                                            modelname=args.m, t=args.t), fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_t_up(), args.t)
-                                            and common.fequals.equals(item.get_u(), args.u)
+  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_rho()[0], args.rho)
                                             and common.fequals.equals(item.get_beta(), args.beta))]
 
