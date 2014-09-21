@@ -85,6 +85,7 @@ class Parser:
     self.sign_up = None  # average sign for the determinant corresponding to the spin up electrons
     self.sign_down = None  #average sign for the determinant corresponding to the spin down electrons
     self.sign_normalized = None  # <S> - <S_up> <S_dn>
+    self.sign_up_down = None  # sign_up * sign_down
 
 
   def get_num_orbits(self):
@@ -123,10 +124,15 @@ class Parser:
   def get_nSites(self):
     if self.nSites == None:
       self.nSites = int(re.search('(?<=Number of sites :)\s+.?\d+', self.fileText).group(0))
-      if self.dimension == 2:
-        assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
-      elif self.dimension == 1:
+      if self.dimension == 1:
         assert (self.nSites == self.get_nx())
+
+        # if self.dimension == 2:
+        # try:
+        #       assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
+        #   except:
+        #       self.nx = self.ny = int(math.sqrt(self.nSites / 2.0))
+
     return self.nSites
 
   def get_global_sites(self):
@@ -275,6 +281,13 @@ class Parser:
                                 self.get_sign()[1] ** 2 + self.get_sign_down()[0] ** 2 * self.get_sign_up()[1] ** 2 +
                                 self.get_sign_up()[0] ** 2 * self.get_sign_down()[1] ** 2))
     return self.sign_normalized
+
+  def get_sign_up_down(self):
+      if self.sign_up_down == None:
+          self.sign_up_down = (self.get_sign_up()[0] * self.get_sign_down()[0],
+                               math.sqrt(self.get_sign_down()[0] ** 2 * self.get_sign_up()[1] ** 2 +
+                                         self.get_sign_up()[0] ** 2 * self.get_sign_down()[1] ** 2))
+      return self.sign_up_down
 
 
   def get_struct_XX_F(self):

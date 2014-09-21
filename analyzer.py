@@ -25,6 +25,7 @@ y_variables:
   m1_squares - square of the magnetisation on the 1 orbital
   C - specific heat
   s-wave_rescaled - L^(-7/4) * Ps
+  sign_up_down - sign_up times sign_down
 '''
 import common.get_file_list
 import common.fequals
@@ -55,7 +56,8 @@ parser.add_argument('-y_variable', type=str, help="""variable along y axis can b
 sign - average sign of the determinant
 sign_up - average sign of the determinant for spin up electrons
 sign_down - average sign of the determinant for spin down electrons
-m2_rho - m2 divided by rho.""")
+m2_rho - m2 divided by rho.
+sign_up_down - square sign_up * sign_down""")
 
 parser.add_argument('-x_variable', type=str, help="variable along x axis")
 parser.add_argument('-x_min', type=float, help='minimum x value')
@@ -102,7 +104,7 @@ dataList = (item for item in dataList if (0 <= item.get_rho()[0] <= 2))
 #             ((
 #              item.get_u() != 0 and item.get_mu_up() == 0 and item.get_global_sites() > 0) or item.get_u() == 0 or item.get_mu_up() != 0)]
 
-bipartite_list = ['Lieb', 'square', 'honeycomb', 'chain']
+bipartite_list = ['Lieb', 'square', 'honeycomb', 'chain', '9_16_depleted']
 if args.m in bipartite_list:
   bipartite = True
 else:
@@ -131,13 +133,15 @@ if 'anisotropic' in args.m:
     try:
       item.get_t_up()[1]
     except:
-      if args.t1 == 1:
+        if args.t1 == args.t:
         dataList_temp += [item]
     else:
       if args.t1 == item.get_t_up()[1]:
         dataList_temp += [item]
   dataList = dataList_temp
   print dataList[-1].get_t_up()
+
+
   # dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[1], args.t1)))
 
 if args.x_variable == 'u':
@@ -207,7 +211,8 @@ for shape in shape_list:
   if args.x_variable == 'T':
     xList = [1 / tx for tx in xList]
 
-  errorbar(xList, yList, yerr=yErr, fmt='D-', label=r'${nx} \times {ny}$'.format(nx=shape[0], ny=shape[1]), linewidth=3,
+  errorbar(xList, yList, yerr=yErr, fmt='D-',
+           label=r'${N} = {nx} \times {ny}$'.format(N=shape[2], nx=shape[0], ny=shape[1]), linewidth=3,
            markersize=15)
   if args.to_screen:
     print
@@ -269,14 +274,18 @@ elif args.y_variable == 'm1_squared' and args.t == 0:
   ylabel(r'$\left<m_1^2 \right>[t]$')
 
 if args.y_variable == 'sign':
-  ylabel(r'$\left<sign \right>$')
+    ylabel(r'$\left< {\rm sign} \right>$')
 
 if args.y_variable == 'sign_up':
   ylabel(r'$\left<sign_{\uparrow} \right>$')
 
 
-if args.y_variable == 'C':
+elif args.y_variable == 'C':
   ylabel(r'$C$')
+
+elif args.y_variable == 'sign_up_down':
+    ylabel(r'$\left< {\rm sign}_{\uparrow}\right> \left< S_{\downarrow} \right>$')
+
 
 if args.legend == 'lr' or args.legend == 'rl':
   legend(loc='lower right', fancybox=True, shadow=True)
