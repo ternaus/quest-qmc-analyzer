@@ -71,6 +71,8 @@ parser.add_argument('-T', action="store_true",
 parser.add_argument('-legend', type=str, help='legend position. Possible values: lr, ur, ll, ul')
 
 parser.add_argument('-filter', type=bool, help='Do we filter the data or not. Default True')
+parser.add_argument('-vline', type=float, help='Adds vertical line to the plot at a given position')
+parser.add_argument('-hline', type=float, help='Adds horizontal line to the plot at a given position')
 
 args = parser.parse_args(sys.argv[1:])
 modelName = args.m
@@ -304,4 +306,8 @@ else:
 if '-x_min' in sys.argv:
   xlim(xmin=args.x_min)
 
+if '-vline' in sys.argv:
+    axvline(x=args.vline, linestyle='-', color='black', linewidth=2)
+if '-hline' in sys.argv:
+    axhline(y=args.hline, linestyle='-', color='black', linewidth=2)
 show()
