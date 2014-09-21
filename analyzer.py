@@ -134,7 +134,7 @@ if 'anisotropic' in args.m:
       item.get_t_up()[1]
     except:
         if args.t1 == args.t:
-        dataList_temp += [item]
+            dataList_temp += [item]
     else:
       if args.t1 == item.get_t_up()[1]:
         dataList_temp += [item]
