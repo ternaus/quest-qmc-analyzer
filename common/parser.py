@@ -252,8 +252,12 @@ class Parser:
 
   def get_energy(self):
     if self.energy == None:
-      m = re.search('(?<=Total energy :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)', self.fileText)
-      self.energy = (float(m.groups()[0]), float(m.groups()[1]))
+      try:
+        m = re.search('(?<=Total [e, E]nergy :)\s+(\-?\d+\.\d+E?-?\+?\d+)\s+\+?-?\s+(\d+\.\d+E?\+?-?\d+)',
+                      self.fileText)
+        self.energy = (float(m.groups()[0]), float(m.groups()[1]))
+      except:
+        print self.fileText
     return self.energy
 
   def get_sign(self):

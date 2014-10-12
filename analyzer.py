@@ -133,7 +133,7 @@ if 'anisotropic' in args.m:
 
 if args.x_variable == 'u':
   xlabel(r'$U$')
-  title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m,
+  title(r"{modelname}, $\mu = {mu}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, mu=args.mu, modelname=args.m,
                                                                        t=args.t), fontsize=30)
   dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
                                           and common.fequals.equals(item.get_mu_up(), args.mu)))
