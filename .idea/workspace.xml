@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="Check for fName in fileName removed." />
+    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="extra prints removed">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analyzer.py" afterPath="$PROJECT_DIR$/analyzer.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/divide_into_classes.py" afterPath="$PROJECT_DIR$/common/divide_into_classes.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="analyzer.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,10 +27,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="get_file_list.py" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="get_file_list.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2166065" vertical-offset="0" max-vertical-offset="831">
+            <state vertical-scroll-proportion="-7.2" vertical-offset="0" max-vertical-offset="630">
               <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding />
             </state>
@@ -46,7 +50,7 @@
       <file leaf-file-name="spin_gap.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spin_gap.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="2175">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="645" max-vertical-offset="2175">
               <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
               <folding />
             </state>
@@ -56,8 +60,8 @@
       <file leaf-file-name="divide_into_classes.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1410">
-              <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
+            <state vertical-scroll-proportion="-13.56" vertical-offset="246" max-vertical-offset="1410">
+              <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -96,18 +100,8 @@
       <file leaf-file-name="merge.py" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/merge.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="3435">
-              <caret line="216" column="39" selection-start-line="216" selection-start-column="39" selection-end-line="216" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="analyzer.py" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/analyzer.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-87.6" vertical-offset="750" max-vertical-offset="4530">
-              <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
+            <state vertical-scroll-proportion="-7.72" vertical-offset="1142" max-vertical-offset="3435">
+              <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -118,6 +112,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="555">
               <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="analyzer.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/analyzer.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.35234898" vertical-offset="2295" max-vertical-offset="4470">
+              <caret line="174" column="36" selection-start-line="174" selection-start-column="36" selection-end-line="174" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -158,18 +162,18 @@
         <option value="$PROJECT_DIR$/tests/test_parser.py" />
         <option value="$PROJECT_DIR$/common/extract_data.py" />
         <option value="$PROJECT_DIR$/common/choices.py" />
-        <option value="$PROJECT_DIR$/common/merge.py" />
         <option value="$PROJECT_DIR$/common/parser.py" />
-        <option value="$PROJECT_DIR$/common/divide_into_classes.py" />
-        <option value="$PROJECT_DIR$/analyzer.py" />
         <option value="$PROJECT_DIR$/common/get_file_list.py" />
+        <option value="$PROJECT_DIR$/common/merge.py" />
+        <option value="$PROJECT_DIR$/analyzer.py" />
+        <option value="$PROJECT_DIR$/common/divide_into_classes.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1600" />
     <option name="y" value="24" />
-    <option name="width" value="950" />
+    <option name="width" value="1910" />
     <option name="height" value="1022" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -835,15 +839,23 @@
       <created>1413138984536</created>
       <updated>1413138984536</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Bugfix with energy plot.">
+      <created>1413143228624</created>
+      <updated>1413143228624</updated>
+    </task>
+    <task id="LOCAL-00070" summary="extra prints removed">
+      <created>1413143256442</created>
+      <updated>1413143256442</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1600" y="24" width="950" height="1022" extended-state="0" />
-    <editor active="false" />
+    <frame x="1600" y="24" width="1910" height="1022" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20631579" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13141361" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24736843" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8732719" sideWeight="0.21937172" order="11" side_tool="true" content_ui="tabs" />
@@ -879,8 +891,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="m2 and hopping energy added" />
-    <MESSAGE value="m2, double occupancy and hopping energy added" />
     <MESSAGE value="removed constraint about mu =0 &lt;=&gt; rho=1" />
     <MESSAGE value="Bugfix when we plot versus beta with fixed rho." />
     <MESSAGE value="Now we throw away files if they have rho &gt; =2.1" />
@@ -904,7 +914,9 @@
     <MESSAGE value="added option to draw vertical or horizontal line." />
     <MESSAGE value="Looks like it is ready for use." />
     <MESSAGE value="Check for fName in fileName removed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Check for fName in fileName removed." />
+    <MESSAGE value="Bugfix with energy plot." />
+    <MESSAGE value="extra prints removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="extra prints removed" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1216,14 +1228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spin_gap.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="3190">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/analyzer_min_beta.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3234" max-vertical-offset="5522">
@@ -1256,22 +1260,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/merge.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3240" max-vertical-offset="3435">
-          <caret line="216" column="39" selection-start-line="216" selection-start-column="39" selection-end-line="216" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="870" max-vertical-offset="1410">
-          <caret line="58" column="11" selection-start-line="58" selection-start-column="11" selection-end-line="58" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/extract_data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1635">
@@ -1280,18 +1268,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/analyzer.py">
+    <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-87.6" vertical-offset="750" max-vertical-offset="4530">
-          <caret line="196" column="13" selection-start-line="196" selection-start-column="13" selection-end-line="196" selection-end-column="13" />
+        <state vertical-scroll-proportion="-7.2" vertical-offset="0" max-vertical-offset="630">
+          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
+    <entry file="file://$PROJECT_DIR$/spin_gap.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2166065" vertical-offset="0" max-vertical-offset="831">
-          <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="396" max-vertical-offset="3190">
+          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/merge.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.72" vertical-offset="1142" max-vertical-offset="3435">
+          <caret line="89" column="21" selection-start-line="89" selection-start-column="21" selection-end-line="89" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/divide_into_classes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.56" vertical-offset="246" max-vertical-offset="1410">
+          <caret line="39" column="35" selection-start-line="39" selection-start-column="35" selection-end-line="39" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/analyzer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35234898" vertical-offset="2295" max-vertical-offset="4470">
+          <caret line="174" column="36" selection-start-line="174" selection-start-column="36" selection-end-line="174" selection-end-column="36" />
           <folding />
         </state>
       </provider>

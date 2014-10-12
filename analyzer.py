@@ -131,64 +131,62 @@ if 'anisotropic' in args.m:
       dataList_temp += [item]
   dataList = dataList_temp
 
-
-  # dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[1], args.t1)))
-
 if args.x_variable == 'u':
   xlabel(r'$U$')
-title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m,
+  title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m,
                                                                        t=args.t), fontsize=30)
-dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
                                           and common.fequals.equals(item.get_mu_up(), args.mu)))
 elif args.x_variable == 'mu':
-xlabel(r'$\mu[t]$')
-title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t),
+  xlabel(r'$\mu[t]$')
+  title(
+    r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t),
       fontsize=30)
-dataList = (item for item in dataList if
+  dataList = (item for item in dataList if
             (common.fequals.equals(item.get_u(), args.u) and common.fequals.equals(item.get_beta(), args.beta)))
 elif args.x_variable == 'rho':
-xlabel(r'$\rho$')
-title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m,
+  xlabel(r'$\rho$')
+  title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m,
                                                                   t=[args.t, args.t1]), fontsize=30)
-dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                           and common.fequals.equals(item.get_beta(), args.beta)))
 
 elif args.x_variable == 'beta':
-xlabel(r'$\beta[t]$')
-title(r"{modelname}, $\mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
+  xlabel(r'$\beta[t]$')
+  title(r"{modelname}, $\mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
       fontsize=30)
-dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                           and (common.fequals.equals(item.get_mu_up(), args.mu))))
 
 elif args.x_variable == 'T':
-xlabel(r'$T$')
-title(r"{modelname}, $mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
+  xlabel(r'$T$')
+  title(r"{modelname}, $\mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
       fontsize=30)
-dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                          and common.fequals.equals(item.get_mu_up(), args.mu))]
+  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                            and common.fequals.equals(item.get_mu_up(), args.mu)))
 elif args.x_variable == '1L':
-xlabel(r'$1 / L$')
-title(
-  r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
-                                                                              modelname=args.m, t=args.t), fontsize=30)
-dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                          and common.fequals.equals(item.get_rho()[0], args.rho)
-                                          and common.fequals.equals(item.get_beta(), args.beta))]
+  xlabel(r'$1 / L$')
+  title(
+    r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
+                                                                                modelname=args.m, t=args.t),
+    fontsize=30)
+  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                            and common.fequals.equals(item.get_rho()[0], args.rho)
+                                            and common.fequals.equals(item.get_beta(), args.beta))]
 
 elif args.x_variable == 'num_sites':
-xlabel(r'number of sites')
-title(
-  r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
-                                                                              modelname=args.m, t=args.t),
-  fontsize=30)
-dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                          and common.fequals.equals(item.get_rho()[0], args.rho)
-                                          and common.fequals.equals(item.get_beta(),
-                                                                    args.beta))]  #divide into classes, corresponding to different number of sites
+  xlabel(r'number of sites')
+  title(
+    r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
+                                                                                modelname=args.m, t=args.t),
+    fontsize=30)
+  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                            and common.fequals.equals(item.get_rho()[0], args.rho)
+                                            and common.fequals.equals(item.get_beta(),
+                                                                      args.beta))]  # divide into classes, corresponding to different number of sites
 
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='shape')
 
-print 'into_nSites_dict = ', into_nSites_dict
 print 'waste of time = ', time.time() - start_time
 
 #We choose what lattice sizes are we interested in
@@ -214,10 +212,10 @@ for shape in shape_list:
     print 'yErr = ', yErr
 
 if args.y_variable == 'energy':
-  ylabel(r'$Energy$')
+  ylabel(r'$energy$')
 
 if args.y_variable == 'energy_hop':
-  ylabel(r'$Energy_{hop}$')
+  ylabel(r'$energy_{hop}$')
 
 if args.y_variable == 'X_F':
   ylabel(r'$struct_xx_f$')

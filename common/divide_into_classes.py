@@ -45,7 +45,7 @@ def divide_into_classes(datList, **kwargs):
       else:
         result[key] += [victim]
 
-  elif kwargs['parameter'] == 'beta':
+  elif (kwargs['parameter'] == 'beta') or (kwargs['parameter'] == 'T'):
     for victim in datList:
       if victim.get_beta() not in result:
         result[victim.get_beta()] = [victim]
