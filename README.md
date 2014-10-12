@@ -8,7 +8,14 @@ This README would normally document whatever steps are necessary to get your app
 * At a moment this package is in it's alpha stage. If there will be some interest in it, I would clean the code and release stable version.
 ### How do I get set up? ###
 
-* Summary of set up
+* Download the latest version of the code to you computer:
+
+```
+#!bash
+
+hg clone https://vladimir_iglovikov@bitbucket.org/vladimir_iglovikov/quest-qmc-analyzer
+```
+
 * Configuration
 * Dependencies
 * Database configuration
