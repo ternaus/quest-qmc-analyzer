@@ -16,8 +16,10 @@ This README would normally document whatever steps are necessary to get your app
 hg clone https://vladimir_iglovikov@bitbucket.org/vladimir_iglovikov/quest-qmc-analyzer
 ```
 
-* Configuration
-* Dependencies
+* Generate the data using [QUEST](quest-qmc.googlecode.com) package. For now constraint is that name of the output file should start with the lattice name, followed by an underscore, so for the square lattice possible output file names that this analyzing package will be able to work with are
+ * square_123123.out
+ * square_asfd123asdsdf.out
+* 
 * Database configuration
 * How to run tests
 * Deployment instructions
