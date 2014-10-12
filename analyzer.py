@@ -17,7 +17,8 @@ x_variables:
   num_sites - plot versus number of sites. fixed rho, u, beta
 
 y_variables:
-  Energy
+  energy - total energy
+  energy_hop - hopping energy
   m2 - square of the magnetisation
   01 - density-density correlation between 0 and 1 orbital within unit cell
   11 - density-density correlation between 0 and 1 orbital within unit cell
@@ -36,10 +37,7 @@ from pylab import *
 import argparse
 import os
 import time
-from multiprocessing import Pool
 
-
-p = Pool()
 start_time = time.time()
 
 execfile(os.path.join(os.getcwd(), "common", "plot_properties.py"))
@@ -47,7 +45,7 @@ execfile(os.path.join(os.getcwd(), "common", "plot_properties.py"))
 parser = argparse.ArgumentParser()
 parser.add_argument('-t', type=float, default=1, help="hopping strength t")
 parser.add_argument('-t1', type=float, default=0, help="extra hopping strength t1")
-parser.add_argument('-rho', type=float, help="Electron density")
+parser.add_argument('-mu', type=float, help="chemical potential")
 parser.add_argument('-u', type=float, help="u term")
 parser.add_argument('-beta', type=float, help="inverse temperature")
 
@@ -70,7 +68,7 @@ parser.add_argument('-T', action="store_true",
                     help="if we need graph versus temperature. By default it is versus inverse temperature.")
 parser.add_argument('-legend', type=str, help='legend position. Possible values: lr, ur, ll, ul')
 
-parser.add_argument('-filter', type=bool, help='Do we filter the data or not. Default True')
+parser.add_argument('-filter', type=bool, default=True, help='Do we filter the data or not. Default True')
 parser.add_argument('-vline', type=float, help='Adds vertical line to the plot at a given position')
 parser.add_argument('-hline', type=float, help='Adds horizontal line to the plot at a given position')
 
@@ -122,26 +120,16 @@ if args.filter:
   # We need to remove datapoints if s-wave errorbars > 20%
   dataList = (item for item in dataList if (abs(item.get_s_wave()[1] / item.get_s_wave()[0]) < 0.2))
 
-if (args.m == 'Lieb' or args.m == 'kagome_anisotropic') and args.y_variable == 'rho':
-  axhline(y=2 / 3, linestyle='--', color='black', linewidth=3)
-  axhline(y=4 / 3, linestyle='--', color='black', linewidth=3)
-
 # Filter t
 dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[0], args.t)))
 #Filter t'
 if 'anisotropic' in args.m:
   dataList_temp = []
   for item in dataList:
-    try:
-      item.get_t_up()[1]
-    except:
-        if args.t1 == args.t:
-            dataList_temp += [item]
-    else:
-      if args.t1 == item.get_t_up()[1]:
-        dataList_temp += [item]
+	  if len(item.get_t_up()) == 1:
+		  assert args.t1 == args.t
+		  dataList_temp += [item]
   dataList = dataList_temp
-  print dataList[-1].get_t_up()
 
 
   # dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[1], args.t1)))
@@ -170,13 +158,15 @@ elif args.x_variable == 'rho':
 
 elif args.x_variable == 'beta':
   xlabel(r'$\beta[t]$')
-  title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
+  title(r"{modelname}, $\mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
+        fontsize=30)
   dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and (abs(item.get_rho()[0] - args.rho)) < 0.02 + item.get_rho()[1]))
+                                            and (common.fequals.equals(item.get_mu_up(), args.mu))))
 
 elif args.x_variable == 'T':
   xlabel(r'$T[t]$')
-  title(r"{modelname}, $\rho = {rho}$, $U = {u}$, $t={t}$".format(u=args.u, rho=args.rho, modelname=args.m, t=args.t), fontsize=30)
+  title(r"{modelname}, $mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
+        fontsize=30)
   dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
                                             and common.fequals.equals(item.get_mu_up(), args.mu))]
 elif args.x_variable == '1L':
@@ -225,10 +215,10 @@ for shape in shape_list:
     print 'yList = ', yList
     print 'yErr = ', yErr
 
-if args.y_variable == 'Energy':
+if args.y_variable == 'energy':
   ylabel(r'$Energy$')
 
-if args.y_variable == 'Energy_hop':
+if args.y_variable == 'energy_hop':
   ylabel(r'$Energy_{hop}$')
 
 if args.y_variable == 'X_F':
@@ -265,15 +255,11 @@ if args.y_variable == 'sign_normalized':
   ylabel(
     r'$\left<sign_{\uparrow} sign_{\downarrow} \right> - \left< sign_{\uparrow} \right> \left< sign_{\downarrow} \right>$')
 
-if args.y_variable == 'm0_squared' and args.t != 0:
-  ylabel(r'$\left<m_0^2 \right>[t]$')
-elif args.y_variable == 'm0_squared' and args.t == 0:
-  ylabel(r'$\left<m_0^2 \right>[t]$')
+if args.y_variable == 'm0_squared':
+	ylabel(r'$\left<m_0^2 \right>[$')
 
-if args.y_variable == 'm1_squared' and args.t != 0:
-  ylabel(r'$\left<m_1^2 \right>[t]$')
-elif args.y_variable == 'm1_squared' and args.t == 0:
-  ylabel(r'$\left<m_1^2 \right>[t]$')
+if args.y_variable == 'm1_squared':
+	ylabel(r'$\left<m_1^2 \right>$')
 
 if args.y_variable == 'sign':
     ylabel(r'$\left< {\rm sign} \right>$')
