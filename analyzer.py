@@ -86,9 +86,9 @@ else:
 
 dataList = common.get_file_list.get_filelist(modelName, path, dimension=dimension)
 
-#Clean up datafiles that are for sure bad. No moves were performed.
+# Clean up datafiles that are for sure bad. No moves were performed.
 dataList = (item for item in dataList if
-                ((item.get_global_sites() > 0 and item.get_global_accept > 0) or item.get_global_sites() == 0))
+            ((item.get_global_sites() > 0 and item.get_global_accept > 0) or item.get_global_sites() == 0))
 
 # Clean up datafiles that are for sure bad. Electron density rho is bounded by 0 and 2.
 
@@ -126,66 +126,65 @@ dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[
 if 'anisotropic' in args.m:
   dataList_temp = []
   for item in dataList:
-	  if len(item.get_t_up()) == 1:
-		  assert args.t1 == args.t
-		  dataList_temp += [item]
+    if len(item.get_t_up()) == 1:
+      assert args.t1 == args.t
+      dataList_temp += [item]
   dataList = dataList_temp
 
 
   # dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[1], args.t1)))
 
 if args.x_variable == 'u':
-	xlabel(r'$U$')
-  title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m,
-                                                                         t=args.t), fontsize=30)
-  dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
-                                            and common.fequals.equals(item.get_mu_up(), args.mu)))
+  xlabel(r'$U$')
+title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m,
+                                                                       t=args.t), fontsize=30)
+dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
+                                          and common.fequals.equals(item.get_mu_up(), args.mu)))
 elif args.x_variable == 'mu':
-  xlabel(r'$\mu[t]$')
-  title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t), fontsize=30)
-  dataList = (item for item in dataList if
-              (common.fequals.equals(item.get_u(), args.u) and common.fequals.equals(item.get_beta(), args.beta)))
+xlabel(r'$\mu[t]$')
+title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t),
+      fontsize=30)
+dataList = (item for item in dataList if
+            (common.fequals.equals(item.get_u(), args.u) and common.fequals.equals(item.get_beta(), args.beta)))
 elif args.x_variable == 'rho':
-  xlabel(r'$\rho$')
-  title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m,
-                                                                    t=[args.t, args.t1]), fontsize=30)
-  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_beta(), args.beta)))
+xlabel(r'$\rho$')
+title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m,
+                                                                  t=[args.t, args.t1]), fontsize=30)
+dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                          and common.fequals.equals(item.get_beta(), args.beta)))
 
 elif args.x_variable == 'beta':
-  xlabel(r'$\beta[t]$')
-  title(r"{modelname}, $\mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
-        fontsize=30)
-  dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and (common.fequals.equals(item.get_mu_up(), args.mu))))
+xlabel(r'$\beta[t]$')
+title(r"{modelname}, $\mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
+      fontsize=30)
+dataList = (item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                          and (common.fequals.equals(item.get_mu_up(), args.mu))))
 
 elif args.x_variable == 'T':
-  xlabel(r'$T$')
-  title(r"{modelname}, $mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
-        fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_mu_up(), args.mu))]
+xlabel(r'$T$')
+title(r"{modelname}, $mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
+      fontsize=30)
+dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                          and common.fequals.equals(item.get_mu_up(), args.mu))]
 elif args.x_variable == '1L':
-  xlabel(r'$1 / L$')
-  title(r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
-                                                                           modelname=args.m, t=args.t), fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_rho()[0], args.rho)
-                                            and common.fequals.equals(item.get_beta(), args.beta))]
+xlabel(r'$1 / L$')
+title(
+  r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
+                                                                              modelname=args.m, t=args.t), fontsize=30)
+dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                          and common.fequals.equals(item.get_rho()[0], args.rho)
+                                          and common.fequals.equals(item.get_beta(), args.beta))]
 
 elif args.x_variable == 'num_sites':
-  xlabel(r'number of sites')
-  title(
-    r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
-                                                                                modelname=args.m, t=args.t),
-    fontsize=30)
-  dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_rho()[0], args.rho)
-                                            and common.fequals.equals(item.get_beta(), args.beta))]
-
-
-
-#divide into classes, corresponding to different number of sites
+xlabel(r'number of sites')
+title(
+  r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
+                                                                              modelname=args.m, t=args.t),
+  fontsize=30)
+dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
+                                          and common.fequals.equals(item.get_rho()[0], args.rho)
+                                          and common.fequals.equals(item.get_beta(),
+                                                                    args.beta))]  #divide into classes, corresponding to different number of sites
 
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='shape')
 
@@ -201,11 +200,6 @@ for shape in shape_list:
 
   if args.x_variable == 'T':
     xList = [1 / tx for tx in xList]
-
-  print
-  print xList
-  print yList
-  print yErr
 
   errorbar(xList, yList, yerr=yErr, fmt='D-',
            label=r'${N} = {nx} \times {ny}$'.format(N=shape[2], nx=shape[0], ny=shape[1]), linewidth=3,
@@ -263,10 +257,10 @@ if args.y_variable == 'm0_squared':
   ylabel(r'$\left<m_0^2 \right>$')
 
 if args.y_variable == 'm1_squared':
-	ylabel(r'$\left<m_1^2 \right>$')
+  ylabel(r'$\left<m_1^2 \right>$')
 
 if args.y_variable == 'sign':
-    ylabel(r'$\left< {\rm sign} \right>$')
+  ylabel(r'$\left< {\rm sign} \right>$')
 
 if args.y_variable == 'sign_up':
   ylabel(r'$\left<sign_{\uparrow} \right>$')
@@ -276,8 +270,7 @@ elif args.y_variable == 'C':
   ylabel(r'$C$')
 
 elif args.y_variable == 'sign_up_down':
-    ylabel(r'$\left< {\rm sign}_{\uparrow}\right> \left< S_{\downarrow} \right>$')
-
+  ylabel(r'$\left< {\rm sign}_{\uparrow}\right> \left< S_{\downarrow} \right>$')
 
 if args.legend == 'lr' or args.legend == 'rl':
   legend(loc='lower right', fancybox=True, shadow=True)
@@ -297,7 +290,7 @@ if '-x_min' in sys.argv:
   xlim(xmin=args.x_min)
 
 if '-vline' in sys.argv:
-    axvline(x=args.vline, linestyle='-', color='black', linewidth=2)
+  axvline(x=args.vline, linestyle='-', color='black', linewidth=2)
 if '-hline' in sys.argv:
-    axhline(y=args.hline, linestyle='-', color='black', linewidth=2)
+  axhline(y=args.hline, linestyle='-', color='black', linewidth=2)
 show()
