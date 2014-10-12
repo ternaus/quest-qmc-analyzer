@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="Looks like it is ready for use.">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/analyzer.py" afterPath="$PROJECT_DIR$/analyzer.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/common/get_file_list.py" afterPath="$PROJECT_DIR$/common/get_file_list.py" />
+    <list default="true" id="7e8087a0-2fde-4f20-a5c4-e4ccca3256da" name="Default" comment="Check for fName in fileName removed.">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="analyzer.iws" />
@@ -30,7 +28,7 @@
       <file leaf-file-name="get_file_list.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20134228" vertical-offset="0" max-vertical-offset="894">
+            <state vertical-scroll-proportion="0.2166065" vertical-offset="0" max-vertical-offset="831">
               <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
               <folding />
             </state>
@@ -173,7 +171,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="1600" />
     <option name="y" value="24" />
-    <option name="width" value="1910" />
+    <option name="width" value="950" />
     <option name="height" value="1022" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -835,15 +833,19 @@
       <created>1413072498419</created>
       <updated>1413072498419</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="Check for fName in fileName removed.">
+      <created>1413138984536</created>
+      <updated>1413138984536</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="1600" y="24" width="1910" height="1022" extended-state="0" />
+    <frame x="1600" y="24" width="950" height="1022" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1026178" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20631579" sideWeight="0.78293735" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24736843" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.8732719" sideWeight="0.21937172" order="11" side_tool="true" content_ui="tabs" />
@@ -879,7 +881,6 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <MESSAGE value="bugfix that allows negative t" />
     <MESSAGE value="m2 and hopping energy added" />
     <MESSAGE value="m2, double occupancy and hopping energy added" />
     <MESSAGE value="removed constraint about mu =0 &lt;=&gt; rho=1" />
@@ -904,7 +905,8 @@
     <MESSAGE value="typo fixed." />
     <MESSAGE value="added option to draw vertical or horizontal line." />
     <MESSAGE value="Looks like it is ready for use." />
-    <option name="LAST_COMMIT_MESSAGE" value="Looks like it is ready for use." />
+    <MESSAGE value="Check for fName in fileName removed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Check for fName in fileName removed." />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1290,7 +1292,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/common/get_file_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20134228" vertical-offset="0" max-vertical-offset="894">
+        <state vertical-scroll-proportion="0.2166065" vertical-offset="0" max-vertical-offset="831">
           <caret line="15" column="34" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
           <folding />
         </state>
