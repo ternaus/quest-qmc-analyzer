@@ -68,7 +68,7 @@ parser.add_argument('-T', action="store_true",
                     help="if we need graph versus temperature. By default it is versus inverse temperature.")
 parser.add_argument('-legend', type=str, help='legend position. Possible values: lr, ur, ll, ul')
 
-parser.add_argument('-filter', type=bool, default=True, help='Do we filter the data or not. Default True')
+parser.add_argument('-filter', type=bool, default=False, help='Do we filter the data or not. Default True')
 parser.add_argument('-vline', type=float, help='Adds vertical line to the plot at a given position')
 parser.add_argument('-hline', type=float, help='Adds horizontal line to the plot at a given position')
 
@@ -136,8 +136,8 @@ if 'anisotropic' in args.m:
 
 if args.x_variable == 'u':
 	xlabel(r'$U$')
-  title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m, t=args.t),
-        fontsize=30)
+  title(r"{modelname}, $\rho = {rho}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, rho=args.rho, modelname=args.m,
+                                                                         t=args.t), fontsize=30)
   dataList = (item for item in dataList if (common.fequals.equals(item.get_beta(), args.beta)
                                             and common.fequals.equals(item.get_mu_up(), args.mu)))
 elif args.x_variable == 'mu':
@@ -145,7 +145,6 @@ elif args.x_variable == 'mu':
   title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m, t=args.t), fontsize=30)
   dataList = (item for item in dataList if
               (common.fequals.equals(item.get_u(), args.u) and common.fequals.equals(item.get_beta(), args.beta)))
-
 elif args.x_variable == 'rho':
   xlabel(r'$\rho$')
   title(r"{modelname}, $U = {u}$, $\beta = {beta}$, $t={t}$".format(beta=args.beta, u=args.u, modelname=args.m,
@@ -161,7 +160,7 @@ elif args.x_variable == 'beta':
                                             and (common.fequals.equals(item.get_mu_up(), args.mu))))
 
 elif args.x_variable == 'T':
-  xlabel(r'$T[t]$')
+  xlabel(r'$T$')
   title(r"{modelname}, $mu = {mu}$, $U = {u}$, $t={t}$".format(u=args.u, mu=args.mu, modelname=args.m, t=args.t),
         fontsize=30)
   dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
@@ -185,9 +184,12 @@ elif args.x_variable == 'num_sites':
                                             and common.fequals.equals(item.get_beta(), args.beta))]
 
 
+
 #divide into classes, corresponding to different number of sites
+
 into_nSites_dict = common.divide_into_classes.divide_into_classes(dataList, parameter='shape')
 
+print 'into_nSites_dict = ', into_nSites_dict
 print 'waste of time = ', time.time() - start_time
 
 #We choose what lattice sizes are we interested in
@@ -199,6 +201,11 @@ for shape in shape_list:
 
   if args.x_variable == 'T':
     xList = [1 / tx for tx in xList]
+
+  print
+  print xList
+  print yList
+  print yErr
 
   errorbar(xList, yList, yerr=yErr, fmt='D-',
            label=r'${N} = {nx} \times {ny}$'.format(N=shape[2], nx=shape[0], ny=shape[1]), linewidth=3,
@@ -234,13 +241,13 @@ if args.y_variable == 's-wave_rescaled':
   ylabel(r'$L^{-7/4} P_s$')
 
 if args.y_variable == '01':
-  ylabel(r'$\left<n_0 n_1\right>[t]$')
+  ylabel(r'$\left<n_0 n_1\right>$')
 
 if args.y_variable == '12':
-  ylabel(r'$\left<n_1 n_2\right>[t]$')
+  ylabel(r'$\left<n_1 n_2\right>$')
 
 if args.y_variable == '00':
-  ylabel(r'$\left<n_{0,(0,0)} n_{0, (1, 0)}\right>[t]$')
+  ylabel(r'$\left<n_{0,(0,0)} n_{0, (1, 0)}\right>$')
 
 if args.y_variable == 'm2':
   ylabel(r'$\left<m^2\right>$')
@@ -253,7 +260,7 @@ if args.y_variable == 'sign_normalized':
     r'$\left<sign_{\uparrow} sign_{\downarrow} \right> - \left< sign_{\uparrow} \right> \left< sign_{\downarrow} \right>$')
 
 if args.y_variable == 'm0_squared':
-	ylabel(r'$\left<m_0^2 \right>[$')
+  ylabel(r'$\left<m_0^2 \right>$')
 
 if args.y_variable == 'm1_squared':
 	ylabel(r'$\left<m_1^2 \right>$')

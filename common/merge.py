@@ -43,7 +43,7 @@ def merge(dict_to_merge, variable):
   yList = []
   yErr = []
 
-  if variable == 'Energy':
+  if variable == 'energy':
     for x in xList:
       yList += [numpy.mean([item.get_energy()[0] for item in dict_to_merge[x]])]
       temp = [item.get_energy()[1] ** 2 for item in dict_to_merge[x]]
@@ -87,7 +87,7 @@ def merge(dict_to_merge, variable):
       temp = [(math.pow(item.get_L(), -7.0 / 4.0) * item.get_s_wave()[1]) ** 2 for item in dict_to_merge[x]]
       yErr += [math.sqrt(sum(temp)) / len(temp)]
 
-  elif variable == 'Energy_hop':
+  elif variable == 'energy_hop':
     for x in xList:
       E_hop_average = numpy.mean([item.get_energy_hop()[0] for item in dict_to_merge[x]])
       yList += [E_hop_average]
