@@ -75,6 +75,22 @@ parser.add_argument('-hline', type=float, help='Adds horizontal line to the plot
 args = parser.parse_args(sys.argv[1:])
 modelName = args.m
 
+allowed_y_variables = ['energy',
+                       'energy_hop',
+                       'sign',
+                       'sign_up',
+                       'sign_down',
+                       'sign_up_down',
+                       'sign_normalized',
+                       'DO',
+                       'rho',
+                       's-wave']
+
+if args.y_variable not in allowed_y_variables:
+  print 'unknown y_variable! ', args.y_variable
+  print 'should be one of: ', allowed_y_variables
+  sys.exit(0)
+
 execfile('settings.py')
 
 path = os.path.join(folder_with_different_models, modelName)
@@ -177,11 +193,11 @@ elif args.x_variable == '1L':
 elif args.x_variable == 'num_sites':
   xlabel(r'number of sites')
   title(
-    r"{modelname}, $\rho = {rho}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, rho=args.rho, beta=args.beta,
+    r"{modelname}, $\mu = {mu}$, $u = {u}$, $\beta = {beta}$, $t={t}$".format(u=args.u, mu=args.mu, beta=args.beta,
                                                                                 modelname=args.m, t=args.t),
     fontsize=30)
   dataList = [item for item in dataList if (common.fequals.equals(item.get_u(), args.u)
-                                            and common.fequals.equals(item.get_rho()[0], args.rho)
+                                            and common.fequals.equals(item.get_mu_up(), args.mu)
                                             and common.fequals.equals(item.get_beta(),
                                                                       args.beta))]  # divide into classes, corresponding to different number of sites
 
