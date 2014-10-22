@@ -1,5 +1,6 @@
 from __future__ import division
 import numpy
+import re
 
 __author__ = 'Vladimir Iglovikov'
 
@@ -7,30 +8,48 @@ __author__ = 'Vladimir Iglovikov'
 def extract_tdm_data(victim, **kwargs):
   parameter = kwargs['parameter']
 
-  temp = victim.strip().split('====================================')
-  temp1 = []
-  for i, item in enumerate(temp):
-    if parameter in item and 'k' not in item:
-      tt = item.replace('=', '').strip()
+  if parameter == 'ld_xx_real':
+    result = {}
+    tm = re.findall(r'(?<=xx Current)([\s 0-9\.E+-]*)', victim.replace('+-', ''))
+    for element in tm:
+      key = element.strip().split('\n')[0].split()
+      tx = int(key[0])
+      ty = int(key[1])
+      temp = []
+      for line in element.strip().split('\n')[1:]:
+        tl = line.strip().split()
+        temp += [(float(tl[0]), float(tl[1]), float(tl[2]))]
+      result[(tx, ty)] = temp
+    return result
 
-      temp1 += [tt]
 
-  result = {}
-  for item in temp1:
-    temp = item.split('\n')
-    key = temp[0].replace(parameter, '').strip().split()
 
-    key = (int(key[0]), int(key[1]), float(key[2]), float(key[3]))
 
-    yList = []
-    yErr = []
-    for i in xrange(1, len(temp) - 1):
-      temp3 = temp[i].replace('+-', '').strip().split()
-      yList += [float(temp3[1])]
-      yErr += [float(temp3[2])]
+  else:
+    temp = victim.strip().split('====================================')
+    temp1 = []
+    for i, item in enumerate(temp):
+      if parameter in item and 'k' not in item:
+        tt = item.replace('=', '').strip()
 
-    result[key] = (numpy.mean(yList), numpy.mean([tx ** 2 for tx in yErr]))
-  return result
+        temp1 += [tt]
+
+    result = {}
+    for item in temp1:
+      temp = item.split('\n')
+      key = temp[0].replace(parameter, '').strip().split()
+
+      key = (int(key[0]), int(key[1]), float(key[2]), float(key[3]))
+
+      yList = []
+      yErr = []
+      for i in xrange(1, len(temp) - 1):
+        temp3 = temp[i].replace('+-', '').strip().split()
+        yList += [float(temp3[1])]
+        yErr += [float(temp3[2])]
+
+      result[key] = (numpy.mean(yList), numpy.mean([tx ** 2 for tx in yErr]))
+    return result
 
 
 def extract_non_tdm_data(victim, **kwargs):

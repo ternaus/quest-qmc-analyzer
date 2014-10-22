@@ -86,7 +86,12 @@ class Parser:
     self.sign_down = None  #average sign for the determinant corresponding to the spin down electrons
     self.sign_normalized = None  # <S> - <S_up> <S_dn>
     self.sign_up_down = None  # sign_up * sign_down
+    self.ld_xx_real = None  # real space current current correlation function
 
+  def get_ld_xx_real(self):
+    if self.ld_xx_real == None:
+      self.ld_xx_real = common.extract_data.extract_tdm_data(self.fileText_tdm, parameter='ld_xx_real')
+    return self.ld_xx_real
 
   def get_num_orbits(self):
     if self.num_orbits == None:
