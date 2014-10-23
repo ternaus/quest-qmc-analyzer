@@ -31,6 +31,8 @@ class TestParser(TestCase):
     dimension = 1
     self.chain = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
+  def test_k_points(self):
+    print self.square.get_k_points()
 
   def test_get_t_up(self):
     self.assertAlmostEqual(1, self.tparser.get_t_up())

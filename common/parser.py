@@ -87,6 +87,51 @@ class Parser:
     self.sign_normalized = None  # <S> - <S_up> <S_dn>
     self.sign_up_down = None  # sign_up * sign_down
     self.ld_xx_real = None  # real space current current correlation function
+    self.k_points = None  # list of tuples of k points
+    self.ld_T = None  # transverse response
+    self.ld_L = None  # longitudinal response
+    self.coordinates = None  # coordinates of the sites
+    self.tau_list = None  # list of tau
+    self.rho_s = None  # rho_s
+
+  def get_tau_list(self):
+    if self.tau_list == None:
+      self.tau_list = list(set([tx[2] for tx in self.get_ld_xx_real().keys()]))
+      self.tau_list.sort()
+    return self.tau_list
+
+  def get_k_points(self):
+    if self.k_points == None:
+      self.k_points = common.extract_data.extract_non_tdm_data(self.fileText, parameter='k_points',
+                                                               dimension=self.dimension)
+    return self.k_points
+
+  def get_ld_T(self):
+    if self.ld_T == None:
+      result = {}
+      for lx, ly in self.get_coordinates():
+        for tau in self.get_tau_list():
+          for qy in self.get_ky_points():
+            result[qy] = math.cos(ly * qy) * self.get_ld_xx_real()[(lx, ly, tau)][0]
+
+    return self.ld_T
+
+  def get_ld_L(self):
+    if self.ld_L == None:
+      result = {}
+      for lx, ly in self.get_coordinates():
+        for tau in self.get_tau_list():
+          for qx in self.get_kx_points():
+            result[qx] = math.cos(lx * qx) * self.get_ld_xx_real()[(lx, ly, tau)][0]
+
+    return self.ld_L
+
+  # TODO join get_ld_L and get_ld_T.
+
+  def get_rho_s(self):
+    if self.rho_s == None:
+      self.rho_s = 0.25 * (self.get_ld_L() - self.get_ld_T())
+    return self.rho_s
 
   def get_ld_xx_real(self):
     if self.ld_xx_real == None:

@@ -15,7 +15,9 @@ class TestParser(TestCase):
     self.time_dep_text = open(os.path.join(os.getcwd(), 'data', 'test.tdm.out')).read()
     self.tparser = common.parser.Parser(self.time_indep_text, tdm=self.time_dep_text, dimension=dimension)
 
-  def test_ld_xxp(self):
-    print self.tparser.get_ld_xx_real()
+  def test_tau_list(self):
+    for i in range(len(self.tparser.get_tau_list())):
+      self.assertAlmostEqual(self.tparser.get_tau_list()[i], i * self.tparser.get_dtau())
+
 
 

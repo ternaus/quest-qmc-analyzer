@@ -15,11 +15,9 @@ def extract_tdm_data(victim, **kwargs):
       key = element.strip().split('\n')[0].split()
       tx = int(key[0])
       ty = int(key[1])
-      temp = []
       for line in element.strip().split('\n')[1:]:
         tl = line.strip().split()
-        temp += [(float(tl[0]), float(tl[1]), float(tl[2]))]
-      result[(tx, ty)] = temp
+        result[(tx, ty, float(tl[0]))] = [(float(tl[1]), float(tl[2]))]
     return result
 
 
@@ -65,7 +63,21 @@ def extract_non_tdm_data(victim, **kwargs):
 
   result = {}
 
-  if 'FT' not in kwargs and 'k_grid' not in kwargs: #We work with non Fourier transform
+  if parameter == 'k_points':
+    result = []
+    tm = re.search(r'(?<=Class)[\s 0-9\.-]*', victim).group()
+    print tm
+    for line in tm.strip().split('\n'):
+      tl = line.strip().split()
+      if len(tl) == 3:
+        result += [(float(tl[1]), float(tl[2]))]
+      elif len(tl) == 2:
+        result += [(float(tl[0]), float(tl[1]))]
+    return result
+
+
+
+  elif 'FT' not in kwargs and 'k_grid' not in kwargs:  # We work with non Fourier transform
     for item in temp1:
       if (parameter in item and "FT" not in item and "Eigenvalues" not in item and "Eigenmodes" not in item):
         temp = item.replace(parameter, '').strip().split('\n')
