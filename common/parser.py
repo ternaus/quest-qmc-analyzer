@@ -23,6 +23,7 @@ class Parser:
 
     if 'tdm' in kwargs:
       self.fileText_tdm = kwargs['tdm']
+      self.geometry = kwargs['geometry']
 
     self.u = None
     self.t_up = None
@@ -94,6 +95,11 @@ class Parser:
     self.tau_list = None  # list of tau
     self.rho_s = None  # rho_s
 
+  def get_coordinates(self):
+    if self.coordinates == None:
+      self.coordinates = common.extract_data.extract_geometry(self.geometry, parameter='coordinates')
+    return self.coordinates
+
   def get_tau_list(self):
     if self.tau_list == None:
       self.tau_list = list(set([tx[2] for tx in self.get_ld_xx_real().keys()]))
@@ -108,21 +114,23 @@ class Parser:
 
   def get_ld_T(self):
     if self.ld_T == None:
-      result = {}
-      for lx, ly in self.get_coordinates():
+      self.ld_T = {}
+      for site in self.get_coordinates():
+        lx, ly = self.get_coordinates()[site][2], self.get_coordinates()[site][3]
         for tau in self.get_tau_list():
           for qy in self.get_ky_points():
-            result[qy] = math.cos(ly * qy) * self.get_ld_xx_real()[(lx, ly, tau)][0]
+            self.ld_T[qy] = math.cos(ly * qy) * self.get_ld_xx_real()[(lx, ly, tau)][0]
 
     return self.ld_T
 
   def get_ld_L(self):
     if self.ld_L == None:
-      result = {}
-      for lx, ly in self.get_coordinates():
+      self.ld_L = {}
+      for site in self.get_coordinates():
+        lx, ly = self.get_coordinates()[site][2], self.get_coordinates()[site][3]
         for tau in self.get_tau_list():
           for qx in self.get_kx_points():
-            result[qx] = math.cos(lx * qx) * self.get_ld_xx_real()[(lx, ly, tau)][0]
+            self.ld_L[qx] = math.cos(lx * qx) * self.get_ld_xx_real()[(lx, ly, tau)][0]
 
     return self.ld_L
 

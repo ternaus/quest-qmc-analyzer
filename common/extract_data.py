@@ -5,6 +5,18 @@ import re
 __author__ = 'Vladimir Iglovikov'
 
 
+def extract_geometry(victim, **kwargs):
+  parameter = kwargs['parameter']
+  result = {}
+  if parameter == 'coordinates':
+    tm = re.search(r'(?<=Z)[0-9\s s\.]*', victim).group()
+    for line in tm.strip().split("\n"):
+      tp = line.strip().split()
+      index, label, type, x, y, z = int(tp[0]), tp[1], int(tp[2]), float(tp[3]), float(tp[4]), float(tp[5])
+      result[index] = (label, type, x, y, z)
+    return result
+
+
 def extract_tdm_data(victim, **kwargs):
   parameter = kwargs['parameter']
 
