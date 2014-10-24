@@ -23,7 +23,17 @@ def get_filelist_temp(modelName, path):
 def helper_function(fName, **kwargs):
     dimension = kwargs['dimension']
     toOpen_indep = open(fName)
-    p = parser.Parser(toOpen_indep.read(), dimension=dimension)
+    try:
+      toOpen_dep = open(fName.replace('.out', '.tdm.out')).read()
+    except:
+      toOpen_dep = ''
+
+    try:
+      toOpen_geometry = open(fName.replace('.out', '.geometry')).read()
+    except:
+      toOpen_geometry = ''
+
+    p = parser.Parser(toOpen_indep.read(), dimension=dimension, tdm=toOpen_dep, geometry=toOpen_geometry)
     try:
         p.get_rho()
     except:

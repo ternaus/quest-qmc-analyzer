@@ -20,8 +20,14 @@ class Parser:
     self.fileText = fileText
     self.dimension = kwargs['dimension']
 
-    if 'tdm' in kwargs:
+    if 'tdm' not in kwargs:
+      self.fileText_tdm = ''
+    else:
       self.fileText_tdm = kwargs['tdm']
+
+    if 'geometry' not in kwargs:
+      self.geometry = ''
+    else:
       self.geometry = kwargs['geometry']
 
     self.u = None
@@ -128,10 +134,14 @@ class Parser:
           tp_real += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
           tp_im += math.sin((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        self.ld_L[qx] = (tp_real / self.get_nSites(), tp_im / self.get_nSites())
+        self.ld_L[qx] = (self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_im / self.get_nSites())
     return self.ld_L
 
   def get_ld_T(self):
+    '''
+
+    @return: dictionary where key is qy and value is real and imaginary part
+    '''
     # TODO after site numeration is fixed to remove the hack.
     if self.ld_L == None:
       self.ld_L = {}
@@ -145,7 +155,7 @@ class Parser:
           tp_real += math.cos((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
           tp_im += math.sin((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        self.ld_L[qy] = (tp_real / self.get_nSites(), tp_im / self.get_nSites())
+        self.ld_L[qy] = (self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_im / self.get_nSites())
     return self.ld_L
 
 

@@ -123,11 +123,6 @@ class TestParser(TestCase):
   def test_k_grid(self):
     print self.tparser.get_k_grid()
 
-  def test_FT_pairing(self):
-    print self.tparser.get_FT_pairing()
-
-  def test_FT_pairing_00(self):
-    print self.tparser.get_FT_pairing_00()
 
   def test_nx(self):
     self.assertEquals(12, self.tparser1.get_nx())
