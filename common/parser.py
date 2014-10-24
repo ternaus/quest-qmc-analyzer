@@ -129,7 +129,7 @@ class Parser:
         tp_im = 0
         for site1, site2, tau in self.get_ld_xx_real():
           lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
-          lx2, ly2 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
+          lx2, ly2 = self.get_coordinates()[site2 - 1][2], self.get_coordinates()[site2 - 1][3]
 
           tp_real += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
           tp_im += math.sin((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
@@ -143,20 +143,20 @@ class Parser:
     @return: dictionary where key is qy and value is real and imaginary part
     '''
     # TODO after site numeration is fixed to remove the hack.
-    if self.ld_L == None:
-      self.ld_L = {}
+    if self.ld_T == None:
+      self.ld_T = {}
       for qy in self.get_ky_points():
         tp_real = 0
         tp_im = 0
         for site1, site2, tau in self.get_ld_xx_real():
           lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
-          lx2, ly2 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
+          lx2, ly2 = self.get_coordinates()[site2 - 1][2], self.get_coordinates()[site2 - 1][3]
 
           tp_real += math.cos((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
           tp_im += math.sin((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        self.ld_L[qy] = (self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_im / self.get_nSites())
-    return self.ld_L
+        self.ld_T[qy] = (self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_im / self.get_nSites())
+    return self.ld_T
 
 
   def get_ld_xx_real(self):
