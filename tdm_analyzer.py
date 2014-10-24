@@ -65,7 +65,7 @@ parser.add_argument('-hline', type=float, help='Adds horizontal line to the plot
 args = parser.parse_args(sys.argv[1:])
 modelName = args.m
 
-allowed_y_variables = ['lx_xx_L',
+allowed_y_variables = ['ld_xx_L',
                        'ld_xx_T']
 
 if args.y_variable not in allowed_y_variables:
@@ -129,6 +129,7 @@ for shape in shape_list:
     for item in value:
       print
       print 'mu = ', key
+      print 'rho = ', item.get_rho()
       if args.y_variable == 'ld_xx_L':
         print 'ld_xx_L = ', item.get_ld_L()
       elif args.y_variable == 'ld_xx_T':
