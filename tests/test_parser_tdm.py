@@ -13,11 +13,13 @@ class TestParser(TestCase):
     dimension = 2
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'test.out')).read()
     self.time_dep_text = open(os.path.join(os.getcwd(), 'data', 'test.tdm.out')).read()
-    self.tparser = common.parser.Parser(self.time_indep_text, tdm=self.time_dep_text, dimension=dimension)
+    self.geometry = open(os.path.join(os.getcwd(), 'data', 'test.geometry')).read()
+    self.tparser = common.parser.Parser(self.time_indep_text, tdm=self.time_dep_text, geometry=self.geometry,
+                                        dimension=dimension)
 
-  def test_tau_list(self):
-    for i in range(len(self.tparser.get_tau_list())):
-      self.assertAlmostEqual(self.tparser.get_tau_list()[i], i * self.tparser.get_dtau())
-
-
-
+  def test_real_phase(self):
+    # print self.tparser.get_ld_xx_real()
+    for x, xe in self.tparser.get_ld_L().values():
+      self.assertEquals(xe, 0)
+    for x, xe in self.tparser.get_ld_T().values():
+      self.assertEquals(xe, 0)

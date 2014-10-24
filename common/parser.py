@@ -7,7 +7,6 @@ and saves it as a fileds of the class
 from __future__ import division
 import re
 import math
-import numpy
 
 import common
 import common.extract_data
@@ -44,47 +43,46 @@ class Parser:
     self.SzSz_tdm = None
     self.X_F = None
     self.dtau = None
-    self.DO = None #Double occupancy
-    self.s_wave = None #s-wave pairing
-    self.energy_hop = None #hopping term
-    self.L = None #Effective number of unit cells in one direction
-    self.nx = None #Number of unit cells in x direction
-    self.ny = None #Number of unit cells in y direction
-    self.pairing = None #Pairing correlation function.
-    self.pairing_vs_x = None #Pairing vs x
-    self.orbits = None #sorted list of the orbits
-    self.num_orbits = None #number of orbits
-    self.global_sites = None #Number of global move sites
-    self.global_accept = None #Global move accept rate
-    self.m2 = None #Square of the magnetisation
-    self.m = None #Magnetisation
-    self.bc = None #Binder cumulant, defined as self.m2 / (self.m)^2
-    self.n_up2 = None #Square of the upspin density
-    self.n_down2 = None #Square of the downspin density
-    self.density_correlation_upup = None # Density up -density up correlation function
-    self.density_correlation_updn = None # Density up -density down correlation function
-    self.density_correlation = None # Density - density correlation function
-    self.n0 = None #Density on the 0th orbital
-    self.n1 = None #Density on the 1th orbital
-    self.green = None #Mean Equal time green function
-    self.green_up = None # Up equal time green function
-    self.green_down = None # Down equal time green function
-    self.n01_n0_n1 = None #<n0 n1> - <n0> <n1>
-    self.n12_n1_n2 = None #<n1 n2> - <n1> <n2>
-    self.m0_squared = None #Square of the magnetisation on the orbital 0
-    self.m1_squared = None #Square of the magnetisation on the orbital 1
-    self.C = None #Specific heat
-    self.k_grid = None #Grid of the k points corresponding to the different classes
-    self.FT_pairing = None #Fourier transfrom of the pairing correlation function
-    self.FT_pairing_00 = None #Fourier transform of the pairing correlation function for the 00 orbitals
-    self.FT_pairing_10 = None #Fourier transform of the pairing correlation function for the 10 orbitals
-    self.FT_pairing_11 = None #Fourier transform of the pairing correlation function for the 11 orbitals
-    self.FT_pairing_21 = None #Fourier transform of the pairing correlation function for the 21 orbitals
-    self.kx_points = None #k points in the x direction
-    self.ky_points = None #k points in the y direction
+    self.DO = None  # Double occupancy
+    self.s_wave = None  # s-wave pairing
+    self.energy_hop = None  # hopping term
+    self.L = None  # Effective number of unit cells in one direction
+    self.nx = None  # Number of unit cells in x direction
+    self.ny = None  # Number of unit cells in y direction
+    self.pairing = None  # Pairing correlation function.
+    self.pairing_vs_x = None  # Pairing vs x
+    self.orbits = None  # sorted list of the orbits
+    self.num_orbits = None  # number of orbits
+    self.global_sites = None  # Number of global move sites
+    self.global_accept = None  # Global move accept rate
+    self.m2 = None  # Square of the magnetisation
+    self.m = None  # Magnetisation
+    self.bc = None  # Binder cumulant, defined as self.m2 / (self.m)^2
+    self.n_up2 = None  # Square of the upspin density
+    self.n_down2 = None  # Square of the downspin density
+    self.density_correlation_upup = None  # Density up -density up correlation function
+    self.density_correlation_updn = None  # Density up -density down correlation function
+    self.density_correlation = None  # Density - density correlation function
+    self.n0 = None  # Density on the 0th orbital
+    self.n1 = None  # Density on the 1th orbital
+    self.green = None  # Mean Equal time green function
+    self.green_up = None  # Up equal time green function
+    self.green_down = None  # Down equal time green function
+    self.n01_n0_n1 = None  # <n0 n1> - <n0> <n1>
+    self.n12_n1_n2 = None  # <n1 n2> - <n1> <n2>
+    self.m0_squared = None  # Square of the magnetisation on the orbital 0
+    self.m1_squared = None  # Square of the magnetisation on the orbital 1
+    self.C = None  # Specific heat
+    self.FT_pairing = None  # Fourier transfrom of the pairing correlation function
+    self.FT_pairing_00 = None  # Fourier transform of the pairing correlation function for the 00 orbitals
+    self.FT_pairing_10 = None  # Fourier transform of the pairing correlation function for the 10 orbitals
+    self.FT_pairing_11 = None  # Fourier transform of the pairing correlation function for the 11 orbitals
+    self.FT_pairing_21 = None  # Fourier transform of the pairing correlation function for the 21 orbitals
+    self.kx_points = None  # k points in the x direction
+    self.ky_points = None  # k points in the y direction
     self.sign = None  # average sign of the determinant
     self.sign_up = None  # average sign for the determinant corresponding to the spin up electrons
-    self.sign_down = None  #average sign for the determinant corresponding to the spin down electrons
+    self.sign_down = None  # average sign for the determinant corresponding to the spin down electrons
     self.sign_normalized = None  # <S> - <S_up> <S_dn>
     self.sign_up_down = None  # sign_up * sign_down
     self.ld_xx_real = None  # real space current current correlation function
@@ -93,7 +91,6 @@ class Parser:
     self.ld_L = None  # longitudinal response
     self.coordinates = None  # coordinates of the sites
     self.tau_list = None  # list of tau
-    self.rho_s = None  # rho_s
 
   def get_coordinates(self):
     if self.coordinates == None:
@@ -110,38 +107,53 @@ class Parser:
     if self.k_points == None:
       self.k_points = common.extract_data.extract_non_tdm_data(self.fileText, parameter='k_points',
                                                                dimension=self.dimension)
+      self.kx_points = [tx[0] for tx in self.get_k_points()]
+      self.kx_points.sort()
+      self.ky_points = [tx[1] for tx in self.get_k_points()]
+      self.ky_points.sort()
     return self.k_points
 
-  def get_ld_T(self):
-    if self.ld_T == None:
-      self.ld_T = {}
-      for site in self.get_coordinates():
-        lx, ly = self.get_coordinates()[site][2], self.get_coordinates()[site][3]
-        for tau in self.get_tau_list():
-          for qy in self.get_ky_points():
-            self.ld_T[qy] = math.cos(ly * qy) * self.get_ld_xx_real()[(lx, ly, tau)][0]
-
-    return self.ld_T
 
   def get_ld_L(self):
+    # TODO after site numeration is fixed to remove the hack.
     if self.ld_L == None:
       self.ld_L = {}
-      for site in self.get_coordinates():
-        lx, ly = self.get_coordinates()[site][2], self.get_coordinates()[site][3]
-        for tau in self.get_tau_list():
-          for qx in self.get_kx_points():
-            self.ld_L[qx] = math.cos(lx * qx) * self.get_ld_xx_real()[(lx, ly, tau)][0]
+      for qx in self.get_kx_points():
+        tp_real = 0
+        tp_im = 0
+        for site1, site2, tau in self.get_ld_xx_real():
+          lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
+          lx2, ly2 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
 
+          tp_real += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+          tp_im += math.sin((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+
+        self.ld_L[qx] = (tp_real / self.get_nSites(), tp_im / self.get_nSites())
     return self.ld_L
 
-  # TODO join get_ld_L and get_ld_T.
+  def get_ld_T(self):
+    # TODO after site numeration is fixed to remove the hack.
+    if self.ld_L == None:
+      self.ld_L = {}
+      for qy in self.get_ky_points():
+        tp_real = 0
+        tp_im = 0
+        for site1, site2, tau in self.get_ld_xx_real():
+          lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
+          lx2, ly2 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
 
-  def get_rho_s(self):
-    if self.rho_s == None:
-      self.rho_s = 0.25 * (self.get_ld_L() - self.get_ld_T())
-    return self.rho_s
+          tp_real += math.cos((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+          tp_im += math.sin((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+
+        self.ld_L[qy] = (tp_real / self.get_nSites(), tp_im / self.get_nSites())
+    return self.ld_L
+
 
   def get_ld_xx_real(self):
+    '''
+    @return: dictionary, where key index of site 1, index of site 2, tau.
+     value - value of current xx + errorbars.
+    '''
     if self.ld_xx_real == None:
       self.ld_xx_real = common.extract_data.extract_tdm_data(self.fileText_tdm, parameter='ld_xx_real')
     return self.ld_xx_real
@@ -187,7 +199,7 @@ class Parser:
 
         # if self.dimension == 2:
         # try:
-        #       assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
+        # assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
         #   except:
         #       self.nx = self.ny = int(math.sqrt(self.nSites / 2.0))
 
@@ -345,11 +357,11 @@ class Parser:
     return self.sign_normalized
 
   def get_sign_up_down(self):
-      if self.sign_up_down == None:
-          self.sign_up_down = (self.get_sign_up()[0] * self.get_sign_down()[0],
-                               math.sqrt(self.get_sign_down()[0] ** 2 * self.get_sign_up()[1] ** 2 +
-                                         self.get_sign_up()[0] ** 2 * self.get_sign_down()[1] ** 2))
-      return self.sign_up_down
+    if self.sign_up_down == None:
+      self.sign_up_down = (self.get_sign_up()[0] * self.get_sign_down()[0],
+                           math.sqrt(self.get_sign_down()[0] ** 2 * self.get_sign_up()[1] ** 2 +
+                                     self.get_sign_up()[0] ** 2 * self.get_sign_down()[1] ** 2))
+    return self.sign_up_down
 
 
   def get_struct_XX_F(self):
@@ -378,7 +390,8 @@ class Parser:
 
   def get_pairing(self):
     if self.pairing == None:
-      self.pairing = common.extract_data.extract_non_tdm_data(self.fileText, parameter='Pairing correlation function:', dimension=self.dimension)
+      self.pairing = common.extract_data.extract_non_tdm_data(self.fileText, parameter='Pairing correlation function:',
+                                                              dimension=self.dimension)
     return self.pairing
 
   def get_SxSx_tdm(self):
@@ -403,162 +416,22 @@ class Parser:
       self.s_wave = (float(m.groups()[0]), float(m.groups()[1]))
     return self.s_wave
 
-  def get_FT_pairing(self):
-    if self.FT_pairing == None:
-      self.FT_pairing = common.extract_data.extract_non_tdm_data(self.fileText,
-                                                                 parameter='FT of Pairing correlation fn:', FT=True)
-    return self.FT_pairing
-
-  def get_FT_pairing_00(self):
-    if self.FT_pairing_00 == None:
-      self.FT_pairing_00 = numpy.zeros((self.get_nx(), self.get_ny()))
-      for kx in range(self.get_nx()):
-        for ky in range(self.get_ny()):
-          self.FT_pairing_00[(kx, ky)] = -1
-
-      temp = 0
-      for value in self.get_FT_pairing():
-        if value[1] == 0 and value[2] == 0:
-          for kx, ky in self.get_k_grid()[value[0]]:
-            temp += 1
-            if self.get_nx() % 2 == 0:
-              kx_index = round((kx + math.pi) * self.get_nx() / (2 * math.pi))
-            elif self.get_nx() % 2 == 1:
-              kx_index = round(((kx + math.pi) * self.get_nx() / (math.pi) - 1) / 2)
-
-            if self.get_ny() % 2 == 0:
-              ky_index = round((ky + math.pi) * self.get_ny() / (2 * math.pi))
-            elif self.get_ny() % 2 == 1:
-              ky_index = round(((ky + math.pi) * self.get_ny() / (math.pi) - 1) / 2)
-
-            self.FT_pairing_00[(kx_index, ky_index)] = value[3]
-
-      assert temp == self.get_nx() * self.get_ny() #Check if we cover all points
-
-    return self.FT_pairing_00
-
-  def get_FT_pairing_10(self):
-    if self.FT_pairing_10 == None:
-      self.FT_pairing_10 = numpy.zeros((self.get_nx(), self.get_ny()))
-      for kx in range(self.get_nx()):
-        for ky in range(self.get_ny()):
-          self.FT_pairing_10[(kx, ky)] = -1
-
-      temp = 0
-      for value in self.get_FT_pairing():
-        if value[1] == 1 and value[2] == 0:
-          for kx, ky in self.get_k_grid()[value[0]]:
-            temp += 1
-            if self.get_nx() % 2 == 0:
-              kx_index = round((kx + math.pi) * self.get_nx() / (2 * math.pi))
-            elif self.get_nx() % 2 == 1:
-              kx_index = round(((kx + math.pi) * self.get_nx() / (math.pi) - 1) / 2)
-
-            if self.get_ny() % 2 == 0:
-              ky_index = round((ky + math.pi) * self.get_ny() / (2 * math.pi))
-            elif self.get_ny() % 2 == 1:
-              ky_index = round(((ky + math.pi) * self.get_ny() / (math.pi) - 1) / 2)
-
-            self.FT_pairing_10[(kx_index, ky_index)] = value[3]
-
-      assert temp == self.get_nx() * self.get_ny() #Check if we cover all points
-
-    return self.FT_pairing_10
-
-  def get_FT_pairing_11(self):
-    if self.FT_pairing_11 == None:
-      self.FT_pairing_11 = numpy.zeros((self.get_nx(), self.get_ny()))
-      for kx in range(self.get_nx()):
-        for ky in range(self.get_ny()):
-          self.FT_pairing_11[(kx, ky)] = -1
-
-      temp = 0
-      for value in self.get_FT_pairing():
-        if value[1] == 1 and value[2] == 1:
-          for kx, ky in self.get_k_grid()[value[0]]:
-            temp += 1
-            if self.get_nx() % 2 == 0:
-              kx_index = round((kx + math.pi) * self.get_nx() / (2 * math.pi))
-            elif self.get_nx() % 2 == 1:
-              kx_index = round(((kx + math.pi) * self.get_nx() / (math.pi) - 1) / 2)
-
-            if self.get_ny() % 2 == 0:
-              ky_index = round((ky + math.pi) * self.get_ny() / (2 * math.pi))
-            elif self.get_ny() % 2 == 1:
-              ky_index = round(((ky + math.pi) * self.get_ny() / (math.pi) - 1) / 2)
-
-            self.FT_pairing_11[(kx_index, ky_index)] = value[3]
-
-      assert temp == self.get_nx() * self.get_ny() #Check if we cover all points
-
-    return self.FT_pairing_11
-
-  def get_FT_pairing_21(self):
-    if self.FT_pairing_21 == None:
-      self.FT_pairing_21 = numpy.zeros((self.get_nx(), self.get_ny()))
-      for kx in range(self.get_nx()):
-        for ky in range(self.get_ny()):
-          self.FT_pairing_21[(kx, ky)] = -1
-
-      temp = 0
-      for value in self.get_FT_pairing():
-        if value[1] == 2 and value[2] == 1:
-          for kx, ky in self.get_k_grid()[value[0]]:
-            temp += 1
-            if self.get_nx() % 2 == 0:
-              kx_index = round((kx + math.pi) * self.get_nx() / (2 * math.pi))
-            elif self.get_nx() % 2 == 1:
-              kx_index = round(((kx + math.pi) * self.get_nx() / (math.pi) - 1) / 2)
-
-            if self.get_ny() % 2 == 0:
-              ky_index = round((ky + math.pi) * self.get_ny() / (2 * math.pi))
-            elif self.get_ny() % 2 == 1:
-              ky_index = round(((ky + math.pi) * self.get_ny() / (math.pi) - 1) / 2)
-
-            self.FT_pairing_21[(kx_index, ky_index)] = value[3]
-
-      assert temp == self.get_nx() * self.get_ny() #Check if we cover all points
-
-    return self.FT_pairing_21
-
-  def get_k_grid(self):
-    if self.k_grid == None:
-      self.k_grid = common.extract_data.extract_non_tdm_data(self.fileText,
-                                                             parameter="Grid for Green's function", k_grid=True, dimension=self.dimension)
-      grid_points_x = set()
-      grid_points_y = set()
-      temp = 0 #We need to check if number of k points in the k_grid is equal to the number of unit cells
-      for item in self.k_grid.values():
-        temp += len(item)
-        if self.dimension == 2:
-          for (kx, ky) in item:
-            grid_points_x.add(kx)
-            grid_points_y.add(ky)
-        elif self.dimension == 1:
-          for kx in item:
-            grid_points_x.add(kx)
-      self.kx_points = list(grid_points_x)
-      self.ky_points = list(grid_points_y)
-      self.kx_points.sort()
-      self.ky_points.sort()
-
-    return self.k_grid
 
   def get_kx_points(self):
     if self.kx_points == None:
-      self.get_k_grid()
+      self.get_k_points()
     return self.kx_points
 
   def get_ky_points(self):
     if self.ky_points == None:
-      self.get_k_grid()
+      self.get_k_points()
     return self.ky_points
 
   def get_pairing_vs_x(self):
     if self.pairing_vs_x == None:
       resultDict = {}
       for key, value in self.get_pairing().iteritems():
-        if key[3] == 0:#we are interested only in values where y jump is 0
+        if key[3] == 0:  # we are interested only in values where y jump is 0
           newKey = (key[0], key[1])
           if newKey not in resultDict:
             resultDict[newKey] = [(key[2], value[0], value[1])]
@@ -651,12 +524,12 @@ class Parser:
 
   def get_m0_squared(self):
     if self.m0_squared == None:
-      #TODO errobars
+      # TODO errobars
       self.m0_squared = (self.get_n0()[0] - 2 * self.get_density_correlation_up_down()[(0, 0, 0, 0, 0)][0], 0)
     return self.m0_squared
 
   def get_m1_squared(self):
     if self.m1_squared == None:
-      #TODO errobars
+      # TODO errobars
       self.m1_squared = (self.get_n1()[0] - 2 * self.get_density_correlation_up_down()[(1, 1, 0, 0, 0)][0], 0)
     return self.m1_squared
