@@ -7,6 +7,7 @@ and saves it as a fileds of the class
 from __future__ import division
 import re
 import math
+import sys
 
 import common
 import common.extract_data
@@ -127,14 +128,23 @@ class Parser:
       for qx in self.get_kx_points():
         tp_real = 0
         tp_im = 0
+        tp_real_err = 0
         for site1, site2, tau in self.get_ld_xx_real():
           lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
           lx2, ly2 = self.get_coordinates()[site2 - 1][2], self.get_coordinates()[site2 - 1][3]
 
           tp_real += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+          tp_real_err += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][1]
           tp_im += math.sin((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        self.ld_L[qx] = (self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_im / self.get_nSites())
+        if abs(tp_im) > 1e-6:
+          print 'ld_L error'
+          print 'qx = ', qx
+          print 'tp_im = ', tp_im
+          sys.exit(0)
+
+        self.ld_L[qx] = (
+        self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
     return self.ld_L
 
   def get_ld_T(self):
@@ -148,14 +158,24 @@ class Parser:
       for qy in self.get_ky_points():
         tp_real = 0
         tp_im = 0
+        tp_real_err = 0
         for site1, site2, tau in self.get_ld_xx_real():
           lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
           lx2, ly2 = self.get_coordinates()[site2 - 1][2], self.get_coordinates()[site2 - 1][3]
 
           tp_real += math.cos((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+          tp_real_err += math.cos((lx1 - lx2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][1]
+
           tp_im += math.sin((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        self.ld_T[qy] = (self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_im / self.get_nSites())
+        if abs(tp_im) > 1e-13:
+          print 'ld_T error'
+          print 'qy = ', qy
+          print 'tp_im = ', tp_im
+          sys.exit(0)
+
+        self.ld_T[qy] = (
+        self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
     return self.ld_T
 
 
