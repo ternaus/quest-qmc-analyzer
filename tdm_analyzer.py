@@ -128,6 +128,8 @@ for shape in shape_list:
   for key, value in splitted.items():
     for item in value:
       print
+      print 'N = ', item.get_nSites()
+      print 'beta = ', item.get_beta()
       print 'mu = ', key
       print 'rho = ', item.get_rho()
       if args.y_variable == 'ld_xx_L':

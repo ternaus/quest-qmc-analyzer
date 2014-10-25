@@ -20,6 +20,12 @@ class TestParser(TestCase):
   def test_real_phase(self):
     # print self.tparser.get_ld_xx_real()
     for x, xe in self.tparser.get_ld_L().values():
-      self.assertEquals(xe, 0)
+      self.assertAlmostEquals(xe, 0)
     for x, xe in self.tparser.get_ld_T().values():
-      self.assertEquals(xe, 0)
+      self.assertAlmostEquals(xe, 0)
+
+
+  def test_L_match_T_at_mPi(self):
+    self.assertAlmostEqual(self.tparser.get_ld_L()[-3.14159][0], self.tparser.get_ld_T()[-3.14159][0])
+
+
