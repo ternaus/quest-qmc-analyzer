@@ -137,14 +137,14 @@ class Parser:
           tp_real_err += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][1]
           tp_im += math.sin((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        if abs(tp_im) > 1e-6:
+        if abs(tp_im) > 0.02:
           print 'ld_L error'
           print 'qx = ', qx
           print 'tp_im = ', tp_im
           sys.exit(0)
 
         self.ld_L[qx] = (
-        self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
+          self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
     return self.ld_L
 
   def get_ld_T(self):
@@ -175,7 +175,7 @@ class Parser:
           sys.exit(0)
 
         self.ld_T[qy] = (
-        self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
+          self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
     return self.ld_T
 
 
@@ -230,7 +230,7 @@ class Parser:
         # if self.dimension == 2:
         # try:
         # assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
-        #   except:
+        # except:
         #       self.nx = self.ny = int(math.sqrt(self.nSites / 2.0))
 
     return self.nSites
@@ -510,7 +510,7 @@ class Parser:
   def get_green(self):
     if self.green == None:
       self.green = common.extract_data.extract_non_tdm_data(self.fileText,
-                                                            parameter="Mean Equal time Green's function:")
+                                                            parameter="Mean Equal time Green's function")
     return self.green
 
   def get_green_up(self):

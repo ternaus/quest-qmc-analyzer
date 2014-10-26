@@ -64,7 +64,6 @@ def extract_tdm_data(victim, **kwargs):
 
 def extract_non_tdm_data(victim, **kwargs):
   parameter = kwargs['parameter']
-  dimension = kwargs['dimension']
 
   if parameter == 'k_points':
     result = []
@@ -76,11 +75,22 @@ def extract_non_tdm_data(victim, **kwargs):
       elif len(tl) == 2:
         result += [(float(tl[0]), float(tl[1]))]
     return result
+  elif parameter == "Mean Equal time Green's function":
+    result = []
+    tm = re.search(r"(?<=Mean Equal time Green's function:)[\s 0-9\.E+-]*", victim).group()
+    tm = tm.replace('+-', '').strip().split("\n")
+    for line in tm:
+      tl = line.strip().split()
+      orbit1, orbit2, x, y, z, symmetry, value, err = int(tl[0]), int(tl[1]), float(tl[2]), float(tl[3]), float(
+        tl[4]), int(tl[5]), float(tl[6]), float(tl[7])
+      result += [orbit1, orbit2, x, y, z, symmetry, value, err]
+    return result
+
 
     # temp = victim.strip().split('====================================')
     # temp1 = []
     # for i, item in enumerate(temp):
-    #     if parameter in item:
+    # if parameter in item:
     #       tt = item.replace('=', '').strip()
     #       temp1 += [tt]
     #
