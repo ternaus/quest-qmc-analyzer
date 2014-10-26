@@ -159,9 +159,12 @@ class Parser:
     if self.k_points == None:
       self.k_points = common.extract_data.extract_non_tdm_data(self.fileText, parameter='k_points',
                                                                dimension=self.dimension)
-      self.kx_points = [tx[0] for tx in self.get_k_points()]
+
+      self.kx_points = list(set([tx[0] for tx in self.get_k_points()]))
+
       self.kx_points.sort()
-      self.ky_points = [tx[1] for tx in self.get_k_points()]
+      self.ky_points = list(set([tx[1] for tx in self.get_k_points()]))
+
       self.ky_points.sort()
     return self.k_points
 
@@ -202,22 +205,23 @@ class Parser:
     # TODO after site numeration is fixed to remove the hack.
     if self.ld_T == None:
       self.ld_T = {}
-      for qy in self.get_ky_points():
-        if qy > 0:
-          continue
+
+      for qy in self.get_ky_points()[:4]:
+        # if qy >= 0 or qy == -3.14159:
+        # continue
         tp_real = 0
         tp_im = 0
         tp_real_err = 0
         for site1, site2, tau in self.get_ld_xx_real():
           lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
           lx2, ly2 = self.get_coordinates()[site2 - 1][2], self.get_coordinates()[site2 - 1][3]
-
-          tp_real += math.cos((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
-          tp_real_err += math.cos((lx1 - lx2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][1]
+          m_cos = math.cos((ly1 - ly2) * qy)
+          tp_real += m_cos * self.get_ld_xx_real()[(site1, site2, tau)][0]
+          tp_real_err += m_cos * self.get_ld_xx_real()[(site1, site2, tau)][1]
 
           tp_im += math.sin((ly1 - ly2) * qy) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
-        if abs(tp_im) > 1e-13:
+        if abs(tp_im) > 1e-5:
           print 'ld_T error'
           print 'qy = ', qy
           print 'tp_im = ', tp_im
