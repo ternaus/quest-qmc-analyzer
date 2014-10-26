@@ -222,7 +222,7 @@ def merge(dict_to_merge, variable):
     for x in xList:
       yList += [numpy.mean([item.get_kx()[0] for item in dict_to_merge[x]])]
       temp = [item.get_kx()[1] ** 2 for item in dict_to_merge[x]]
-          yErr += [math.sqrt(sum(temp)) / len(temp)]
+      yErr += [math.sqrt(sum(temp)) / len(temp)]
 
 
 

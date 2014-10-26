@@ -32,6 +32,7 @@ class Parser:
       self.geometry = open(kwargs['geometry']).read()
 
     self.u = None
+    self.num_slices = None  # Number of time slices
     self.t_up = None
     self.t_down = None
     self.mu_up = None
@@ -99,6 +100,37 @@ class Parser:
     self.coordinates = None  # coordinates of the sites
     self.tau_list = None  # list of tau
     self.kx = None  # Hopping energy measured along x axis
+    self.ld_w = None  #ld_xx at q = 0, w != 0
+
+  def get_num_slices(self):
+    if self.num_slices == None:
+      self.num_slices = int(re.search('(?<=Time slice - L :)\s+.?\d+', self.fileText).group(0))
+    return self.num_slices
+
+  def get_ld_w(self):
+    # TODO after site numeration is fixed to remove the hack.
+    if self.ld_w == None:
+      self.ld_w = {}
+      for omega in range(self.get_num_slices()):
+        tp_real = 0
+        tp_im = 0
+        tp_real_err = 0
+        for site1, site2, tau in self.get_ld_xx_real():
+          tp_real += math.cos(2 * math.pi * omega * tau / self.get_beta()) * self.get_ld_xx_real()[(site1, site2, tau)][
+            0]
+          tp_real_err += math.cos(2 * math.pi * omega * tau / self.get_beta()) * \
+                         self.get_ld_xx_real()[(site1, site2, tau)][1]
+          tp_im += math.sin(2 * math.pi * omega * tau / self.get_beta()) * self.get_ld_xx_real()[(site1, site2, tau)][0]
+
+        if abs(tp_im) > 0.02:
+          print 'ld_w error'
+          print 'omega = ', omega
+          print 'tp_im = ', tp_im
+          sys.exit(0)
+
+        self.ld_w[omega] = (
+          self.get_dtau() * tp_real / self.get_nSites(), self.get_dtau() * tp_real_err / self.get_nSites())
+    return self.ld_w
 
   def get_kx(self):
     if self.kx == None:
@@ -139,6 +171,8 @@ class Parser:
     if self.ld_L == None:
       self.ld_L = {}
       for qx in self.get_kx_points():
+        if qx > 0:
+          continue
         tp_real = 0
         tp_im = 0
         tp_real_err = 0
@@ -169,6 +203,8 @@ class Parser:
     if self.ld_T == None:
       self.ld_T = {}
       for qy in self.get_ky_points():
+        if qy > 0:
+          continue
         tp_real = 0
         tp_im = 0
         tp_real_err = 0

@@ -54,6 +54,7 @@ parser.add_argument('-m', type=str, help="Name of the model")
 parser.add_argument('-y_variable', type=str, help="""variable along y axis can be
 ld_xx_L -
 ld_xx_T -
+ld_xx_w -
 """)
 
 parser.add_argument('-to_screen', default=False, type=bool, help='Should we print results on the screen or not.')
@@ -66,7 +67,8 @@ args = parser.parse_args(sys.argv[1:])
 modelName = args.m
 
 allowed_y_variables = ['ld_xx_L',
-                       'ld_xx_T']
+                       'ld_xx_T',
+                       'ld_xx_w']
 
 if args.y_variable not in allowed_y_variables:
   print 'unknown y_variable! ', args.y_variable
@@ -132,7 +134,11 @@ for shape in shape_list:
       print 'beta = ', item.get_beta()
       print 'mu = ', key
       print 'rho = ', item.get_rho()
+      print 'kx = ', item.get_kx()
       if args.y_variable == 'ld_xx_L':
         print 'ld_xx_L = ', item.get_ld_L()
       elif args.y_variable == 'ld_xx_T':
         print 'ld_xx_T = ', item.get_ld_T()
+      elif args.y_variable == 'ld_xx_w':
+        print 'ld_xx_w = ', item.get_ld_w()
+
