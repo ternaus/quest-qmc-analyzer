@@ -27,6 +27,7 @@ y_variables:
   C - specific heat
   s-wave_rescaled - L^(-7/4) * Ps
   sign_up_down - sign_up times sign_down
+  kx - hooping energy along x axis.
 '''
 import common.get_file_list
 import common.fequals
@@ -84,7 +85,8 @@ allowed_y_variables = ['energy',
                        'sign_normalized',
                        'DO',
                        'rho',
-                       's-wave']
+                       's-wave',
+                       'kx']
 
 if args.y_variable not in allowed_y_variables:
   print 'unknown y_variable! ', args.y_variable
@@ -238,6 +240,10 @@ if args.y_variable == 'X_F':
 
 if args.y_variable == 'rho':
   ylabel(r'$\rho$')
+
+if args.y_variable == 'kx':
+  ylabel(r'$kx$')
+
 
 if args.y_variable == 'DO':
   ylabel(r'$\left<N_{up} N_{down}\right>$')

@@ -32,6 +32,7 @@ def merge(dict_to_merge, variable):
     m1_squared - square of the magnetisation on the 1 orbital
     C - specific heat
     m2_rho - magnetisation squared divided by rho
+    kx - hopping energy along x axis
   @return:
     xList - sorted list of the keys
     yList - list of corresponding y values
@@ -215,6 +216,12 @@ def merge(dict_to_merge, variable):
       for x in xList:
           yList += [numpy.mean([item.get_sign_up_down()[0] for item in dict_to_merge[x]])]
           temp = [item.get_sign_up_down()[1] ** 2 for item in dict_to_merge[x]]
+          yErr += [math.sqrt(sum(temp)) / len(temp)]
+
+  elif variable == 'kx':
+    for x in xList:
+      yList += [numpy.mean([item.get_kx()[0] for item in dict_to_merge[x]])]
+      temp = [item.get_kx()[1] ** 2 for item in dict_to_merge[x]]
           yErr += [math.sqrt(sum(temp)) / len(temp)]
 
 

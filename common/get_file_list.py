@@ -24,12 +24,12 @@ def helper_function(fName, **kwargs):
     dimension = kwargs['dimension']
     toOpen_indep = open(fName)
     try:
-      toOpen_dep = open(fName.replace('.out', '.tdm.out')).read()
+      toOpen_dep = fName.replace('.out', '.tdm.out')
     except:
       toOpen_dep = ''
 
     try:
-      toOpen_geometry = open(fName.replace('.out', '.geometry')).read()
+      toOpen_geometry = fName.replace('.out', '.geometry')
     except:
       toOpen_geometry = ''
 

@@ -11,9 +11,8 @@ __author__ = 'Vladimir Iglovikov'
 class TestParser(TestCase):
   def setUp(self):
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'Lieb_1385474159.53.out')).read()
-    self.time_dep_text = open(os.path.join(os.getcwd(), 'data', 'Lieb_1385474159.53.tdm.out')).read()
     dimension = 2
-    self.tparser = common.parser.Parser(self.time_indep_text, tdm=self.time_dep_text, dimension=dimension)
+    self.tparser = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'Lieb_1387496388.34.out')).read()
     self.tparser1 = common.parser.Parser(self.time_indep_text, dimension=dimension)
@@ -21,7 +20,7 @@ class TestParser(TestCase):
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'kagome_anisotropic_1397688531.07.out')).read()
     self.kagome = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
-    self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'square_1409090541.43.out')).read()
+    self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'test.out')).read()
     self.square = common.parser.Parser(self.time_indep_text, dimension=dimension)
 
     self.time_indep_text = open(os.path.join(os.getcwd(), 'data', 'honeycomb_1408666691.0.out')).read()
@@ -35,12 +34,12 @@ class TestParser(TestCase):
     print self.square.get_k_points()
 
   def test_get_t_up(self):
-    self.assertAlmostEqual(1, self.tparser.get_t_up())
-    self.assertAlmostEqual(1, self.kagome.get_t_up())
+    self.assertAlmostEqual(1, self.tparser.get_t_up()[0])
+    self.assertAlmostEqual(1, self.kagome.get_t_up()[0])
 
   def test_get_t_down(self):
-    self.assertAlmostEqual(1, self.tparser.get_t_down())
-    self.assertAlmostEqual(1, self.kagome.get_t_down())
+    self.assertAlmostEqual(1, self.tparser.get_t_down()[0])
+    self.assertAlmostEqual(1, self.kagome.get_t_down()[0])
 
   def test_get_U(self):
     self.assertAlmostEqual(0, self.tparser.get_u())
@@ -80,23 +79,7 @@ class TestParser(TestCase):
     self.assertEquals(0, self.tparser.get_global_sites())
     self.assertEquals(0, self.tparser1.get_global_sites())
 
-    #
 
-  # def test_get_beta(self):
-  #   self.fail()
-  #
-  # def test_get_n_up(self):
-  #   self.fail()
-  #
-  # def test_get_n_down(self):
-  #   self.fail()
-  #
-  # def test_get_rho(self):
-  #   self.fail()
-  #
-  # def test_get_energy(self):
-  #   self.fail()
-  #
   def test_get_struct_XX_F(self):
     self.assertAlmostEqual(0.97803575e-1, self.tparser.get_struct_XX_F()[0])
 
@@ -120,8 +103,6 @@ class TestParser(TestCase):
       2 - self.tparser.get_green_up()[(0, 0, 0, 0, 0)][0] - self.tparser.get_green_down()[(0, 0, 0, 0, 0)][0],
       self.tparser.get_n0()[0])
 
-  def test_k_grid(self):
-    print self.tparser.get_k_grid()
 
 
   def test_nx(self):

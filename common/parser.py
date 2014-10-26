@@ -24,12 +24,12 @@ class Parser:
     if 'tdm' not in kwargs:
       self.fileText_tdm = ''
     else:
-      self.fileText_tdm = kwargs['tdm']
+      self.fileText_tdm = open(kwargs['tdm']).read()
 
     if 'geometry' not in kwargs:
       self.geometry = ''
     else:
-      self.geometry = kwargs['geometry']
+      self.geometry = open(kwargs['geometry']).read()
 
     self.u = None
     self.t_up = None
@@ -98,6 +98,19 @@ class Parser:
     self.ld_L = None  # longitudinal response
     self.coordinates = None  # coordinates of the sites
     self.tau_list = None  # list of tau
+    self.kx = None  # Hopping energy measured along x axis
+
+  def get_kx(self):
+    if self.kx == None:
+      # find minimum nonzero x separation
+      separation_list = list(set([tx[2] for tx in self.get_green()]))
+      separation_list.sort()
+      min_x = separation_list[1]
+      for value in self.get_green():
+        if value[2] == min_x and value[3] == 0 and value[4] == 0:
+          self.kx = (value[6], value[7])
+    return self.kx
+
 
   def get_coordinates(self):
     if self.coordinates == None:
@@ -207,7 +220,7 @@ class Parser:
 
   def get_t_down(self):
     if self.t_down == None:
-      self.t_down = re.search('t_dn :.*', self.fileText).group(0).replace('t_up :', '').strip().split()
+      self.t_down = re.search('t_dn :.*', self.fileText).group(0).replace('t_dn :', '').strip().split()
       self.t_down = [float(tx) for tx in self.t_down]
     return self.t_down
 
