@@ -104,6 +104,8 @@ class TestParser(TestCase):
       self.tparser.get_n0()[0])
 
 
+  def test_kx_ky_product(self):
+    self.assertEqual(self.square.get_nSites(), (len(self.square.get_kx_points()) * len(self.square.get_ky_points())))
 
   def test_nx(self):
     self.assertEquals(12, self.tparser1.get_nx())
