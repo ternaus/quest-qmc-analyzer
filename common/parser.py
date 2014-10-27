@@ -21,12 +21,12 @@ class Parser:
     self.fileText = fileText
     self.dimension = kwargs['dimension']
 
-    if 'tdm' not in kwargs:
+    if 'tdm' not in kwargs or kwargs['tdm'] == '':
       self.fileText_tdm = ''
     else:
       self.fileText_tdm = open(kwargs['tdm']).read()
 
-    if 'geometry' not in kwargs:
+    if 'geometry' not in kwargs or kwargs['geometry'] == '':
       self.geometry = ''
     else:
       self.geometry = open(kwargs['geometry']).read()

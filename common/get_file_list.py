@@ -23,14 +23,15 @@ def get_filelist_temp(modelName, path):
 def helper_function(fName, **kwargs):
     dimension = kwargs['dimension']
     toOpen_indep = open(fName)
-    try:
+
+    if os.path.exists((fName.replace('.out', '.tdm.out'))):
       toOpen_dep = fName.replace('.out', '.tdm.out')
-    except:
+    else:
       toOpen_dep = ''
 
-    try:
+    if os.path.exists((fName.replace('.out', '.geometry'))):
       toOpen_geometry = fName.replace('.out', '.geometry')
-    except:
+    else:
       toOpen_geometry = ''
 
     p = parser.Parser(toOpen_indep.read(), dimension=dimension, tdm=toOpen_dep, geometry=toOpen_geometry)
