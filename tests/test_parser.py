@@ -64,7 +64,7 @@ class TestParser(TestCase):
     self.assertEqual(4, self.tparser.get_L())
 
   # def test_pairing(self):
-  #   print self.tparser.get_pairing()
+  # print self.tparser.get_pairing()
 
   # def test_pairing_vs_x(self):
   #   print self.tparser.get_pairing_vs_x()
@@ -87,9 +87,6 @@ class TestParser(TestCase):
   #   self.fail()
   #
 
-
-  def test_get_SxSx_tdm(self):
-    self.assertEqual(len(self.tparser.get_SxSx_tdm()), len(self.tparser.get_SxSx()))
 
   def test_get_density_correlation_up_up(self):
     self.assertAlmostEqual(0.75788681, self.tparser.get_density_correlation_up_up()[(0, 0, 0, 0, 0)][0])
