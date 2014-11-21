@@ -88,8 +88,10 @@ class TestParser(TestCase):
   #
 
 
+
   def test_get_density_correlation_up_up(self):
     self.assertAlmostEqual(0.75788681, self.tparser.get_density_correlation_up_up()[(0, 0, 0, 0, 0)][0])
+
 
   def test_get_rho_n1_n0_U0(self):
     self.assertAlmostEqual(self.tparser.get_rho()[0],

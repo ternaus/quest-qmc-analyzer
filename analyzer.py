@@ -99,6 +99,8 @@ path = os.path.join(folder_with_different_models, modelName)
 
 if args.m == 'chain':
   dimension = 1
+elif args.m == 'cubic':
+  dimension = 3
 else:
   dimension = 2
 
@@ -122,7 +124,7 @@ dataList = (item for item in dataList if (0 <= item.get_rho()[0] <= 2))
 #             ((
 #              item.get_u() != 0 and item.get_mu_up() == 0 and item.get_global_sites() > 0) or item.get_u() == 0 or item.get_mu_up() != 0)]
 
-bipartite_list = ['Lieb', 'square', 'honeycomb', 'chain', '9_16_depleted']
+bipartite_list = ['Lieb', 'square', 'honeycomb', 'chain', '9_16_depleted', 'ladder', 'one fifth_depleted', 'cubic']
 if args.m in bipartite_list:
   bipartite = True
 else:
@@ -137,16 +139,24 @@ else:
 if args.filter:
   # We need to remove datapoints if s-wave errorbars > 20%
   dataList = (item for item in dataList if (abs(item.get_s_wave()[1] / item.get_s_wave()[0]) < 0.2))
+  if bipartite:
+    dataList = (item for item in dataList if (item.get_mu_up() == 0) and (abs(item.get_rho()[0] - 1) <= 0.03))
 
 # Filter t
 dataList = (item for item in dataList if (common.fequals.equals(item.get_t_up()[0], args.t)))
+
 #Filter t'
-if 'anisotropic' in args.m:
+if 'anisotropic' in args.m or 'one_fifth_depleted' in args.m:
   dataList_temp = []
   for item in dataList:
     if len(item.get_t_up()) == 1:
-      assert args.t1 == args.t
-      dataList_temp += [item]
+      assert args.t == item.get_t_up()[0]
+      if args.t == args.t1:
+        dataList_temp += [item]
+    else:
+      assert args.t == item.get_t_up()[0]
+      if args.t1 == item.get_t_up()[1]:
+        dataList_temp += [item]
   dataList = dataList_temp
 
 if args.x_variable == 'u':

@@ -183,8 +183,9 @@ class Parser:
           lx1, ly1 = self.get_coordinates()[site1 - 1][2], self.get_coordinates()[site1 - 1][3]
           lx2, ly2 = self.get_coordinates()[site2 - 1][2], self.get_coordinates()[site2 - 1][3]
 
-          tp_real += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
-          tp_real_err += math.cos((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][1]
+          m_cos = math.cos((lx1 - lx2) * qx)
+          tp_real += m_cos * self.get_ld_xx_real()[(site1, site2, tau)][0]
+          tp_real_err += m_cos * self.get_ld_xx_real()[(site1, site2, tau)][1]
           tp_im += math.sin((lx1 - lx2) * qx) * self.get_ld_xx_real()[(site1, site2, tau)][0]
 
         if abs(tp_im) > 0.02:
@@ -277,14 +278,6 @@ class Parser:
   def get_nSites(self):
     if self.nSites == None:
       self.nSites = int(re.search('(?<=Number of sites :)\s+.?\d+', self.fileText).group(0))
-      if self.dimension == 1:
-        assert (self.nSites == self.get_nx())
-
-        # if self.dimension == 2:
-        # try:
-        # assert (self.nSites == self.get_num_orbits() * self.get_nx() * self.get_ny())
-        # except:
-        #       self.nx = self.ny = int(math.sqrt(self.nSites / 2.0))
 
     return self.nSites
 
