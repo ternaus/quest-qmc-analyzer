@@ -16,7 +16,7 @@ params = {'backend': 'ps',
           'figure.subplot.right': 0.97,
           'figure.subplot.top': 0.95,
           'figure.figsize': [w, h],
-          'xtick.major.top': False,
+          # 'xtick.major.top': False,
 }
 rcParams.update(params)
 ax = subplot(111)

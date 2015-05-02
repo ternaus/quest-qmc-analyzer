@@ -11,4 +11,4 @@ __author__ = 'Vladimir Iglovikov'
 # /home/valdimir/work/results
 # In this folder I keep folders with different models outputs.
 #ex: Lieb, kagome, square, etc
-folder_with_different_models = os.path.join(os.path.expanduser("~"), 'work', 'results')
+folder_with_different_models = os.path.join(os.path.expanduser("~"), 'workspace', 'results')

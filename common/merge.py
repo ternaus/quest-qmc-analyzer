@@ -190,15 +190,15 @@ def merge(dict_to_merge, variable):
 
   elif variable == 'sign':
     for x in xList:
-      yList += [numpy.mean([item.get_sign()[0] for item in dict_to_merge[x]])]
-      temp = [item.get_sign()[1] ** 2 for item in dict_to_merge[x]]
-      yErr += [math.sqrt(sum(temp)) / len(temp)]
+        temp = [item.get_sign()[0] for item in dict_to_merge[x]]
+        yList += [numpy.mean(temp)]
+        yErr += [2 * numpy.std(temp) / math.sqrt(len(temp))]
 
   elif variable == 'sign_up':
     for x in xList:
       yList += [numpy.mean([item.get_sign_up()[0] for item in dict_to_merge[x]])]
       temp = [item.get_sign_up()[1] ** 2 for item in dict_to_merge[x]]
-      yErr += [math.sqrt(sum(temp)) / len(temp)]
+      yErr += [2 * math.sqrt(sum(temp)) / len(temp)]
 
   elif variable == 'sign_down':
     for x in xList:
@@ -214,10 +214,9 @@ def merge(dict_to_merge, variable):
 
   elif variable == 'sign_up_down':
       for x in xList:
-          yList += [numpy.mean([item.get_sign_up_down()[0] for item in dict_to_merge[x]])]
-          temp = [item.get_sign_up_down()[1] ** 2 for item in dict_to_merge[x]]
-          yErr += [math.sqrt(sum(temp)) / len(temp)]
-
+          temp = [item.get_sign_up_down()[0] for item in dict_to_merge[x]]
+          yList += [numpy.mean(temp)]
+          yErr += [2 * numpy.std(temp) / math.sqrt(len(temp))]
   elif variable == 'kx':
     for x in xList:
       yList += [numpy.mean([item.get_kx()[0] for item in dict_to_merge[x]])]
